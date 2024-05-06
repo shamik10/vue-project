@@ -10,7 +10,7 @@
     <div class="flex flex-col  gap-6 mt-4">
       <div>
         <p class="">
-          <b>Модель</b>: {{ props.name }}
+          <b>Модель</b>: {{ props.title }}
         </p>
         <p class="">
           <b>Описание:</b> {{ props.description }}
@@ -29,12 +29,12 @@
 
 <script setup>
   import { ref } from "vue"
-  
+
   let isLikes = ref(false)
 
   const props = defineProps({
     id: Number,
-    name: String,
+    title: String,
     description: String,
     price: Number
   })

@@ -34,13 +34,13 @@
     searchQuery: '',
   })
 
-  
 
-  const onChangeSearchInput = debounce((event) => {
+
+  const onChangeSearchInput = (event) => {
     filters.searchQuery = event.target.value;
     emit('filters', filters)
     console.log(filters.searchQuery)
-  }, 500)
+  }
 
   const emit = defineEmits(['requestName', 'filters'])
 
@@ -62,5 +62,5 @@
     font-weight: bold;
   }
 
-  
+
 </style>

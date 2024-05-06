@@ -3,8 +3,8 @@
   import AssortimentsList from './modules/AssortimentsList.vue';
   import AllProduct from './components/AllProduct.vue';
   import { reactive, ref } from 'vue';
-  
-  
+
+
   const requestName = ref('')
 
   const dataSearch = reactive({})
@@ -20,8 +20,11 @@
 
 <template>
   <div class=" w-5/6 m-auto mt-10">
-    <HeaderComp @filters="(data) => dataSearch = data" @requestName="eventHanding" />
-    <AllProduct />
+    <HeaderComp @filters="(data) => {
+      dataSearch.value = data
+      console.log(dataSearch.value)
+    }
+      " @requestName="eventHanding" />
     <AssortimentsList :dataSearch="dataSearch" :requestName="requestName" />
   </div>
 </template>
