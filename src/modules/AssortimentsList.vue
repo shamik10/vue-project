@@ -32,22 +32,22 @@
     dataSearch: Object
   })
 
-  const paramVals = reactive({...props.dataSearch.value})
+  const paramVals = reactive({})
 
 
   const onChangeSelect = (event) => {
-    paramVals.sortBy = event.target.value;
+    paramVals.value.sortBy = event.target.value;
   }
-
 
   const assortItems = ref([]);
 
   const fetchAssortiments = async () => {
     try {
-     console.log(props.dataSearch)
+     console.log(props.dataSearch.value)
+     console.log(paramVals)
 
      const params = {
-        sortBy: paramVals.sortBy
+        sortBy: paramVals.value.sortBy
       }
 
 
@@ -69,14 +69,16 @@
     catch(e) {
       console.log(e);
     }
-
+    
   }
 
   watch(paramVals, fetchAssortiments);
 
   watch(() => props.requestName, fetchAssortiments);
+  
 
   onMounted( async () => {
+    paramVals.value = {...props.dataSearch.value};
     await fetchAssortiments();
   })
 

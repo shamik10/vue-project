@@ -26,7 +26,7 @@
 
 <script setup>
   import HomeBlock from "@/components/HomeBlock.vue";
-  import { reactive } from "vue";
+  import { onMounted, reactive } from "vue";
   import debounce from 'lodash.debounce'
 
   const filters = reactive({
@@ -53,6 +53,8 @@
     sendEvent(data)
     console.log(data)
   }
+
+  onMounted(() => emit('filters', filters))
 
 </script>
 
