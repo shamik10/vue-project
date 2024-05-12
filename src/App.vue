@@ -11,7 +11,7 @@
 
   function eventHanding(data) {
     requestName.value = data
-    console.log(data)
+    // console.log(data)
   }
 
 
@@ -22,7 +22,7 @@
   <div class=" w-5/6 m-auto mt-10">
     <HeaderComp @filters="(data) => {
       dataSearch.value = data
-      console.log(dataSearch.value)
+      // console.log(dataSearch.value)
     }
       " @requestName="eventHanding" />
     <AssortimentsList :dataSearch="dataSearch" :requestName="requestName" />

@@ -43,21 +43,21 @@
 
   const fetchAssortiments = async () => {
     try {
-     console.log(props.dataSearch.value)
-     console.log(paramVals)
+    //  console.log(props.dataSearch.value)
 
      const params = {
-        sortBy: paramVals.value.sortBy
+       sortBy: paramVals.value.sortBy
       }
 
+      paramVals.value.searchQuery = props.dataSearch.value.searchQuery
+      // console.log(paramVals)
 
-      if (props.dataSearch.searchQuery) {
-        params.title = `*${props.dataSearch.searchQuery}*`;
+      if (paramVals.value.searchQuery) {
+        params.title = `*${paramVals.value.searchQuery}*`;
+        // console.log(paramVals.value.searchQuery)
       }
-      // params.title = 'Стиральная'
-      // params.sortBy = 'title'
 
-      console.log(params);
+      // console.log(params);
 
       assortItems.value = []
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/${props.requestName || 'appliances'}`, {
@@ -69,13 +69,15 @@
     catch(e) {
       console.log(e);
     }
-    
+
   }
 
   watch(paramVals, fetchAssortiments);
 
+  watch(props.dataSearch, fetchAssortiments)
+
   watch(() => props.requestName, fetchAssortiments);
-  
+
 
   onMounted( async () => {
     paramVals.value = {...props.dataSearch.value};

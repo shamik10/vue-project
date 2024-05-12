@@ -4,7 +4,7 @@
       <HomeBlock @requestName="eventHanding" />
       <div class="w-50   relative">
         <img class="absolute w-10 top-8  right-8 " src="@/assets/images/search.svg" alt="">
-        <input @change="onChangeSearchInput" placeholder="поиск по сайту" type="text" class=" bg-slate-150 border rounded-md   py-9 pl-8 pr-96 outline-none placeholder:text-slate-400 placeholder:text-2xl  hover:shadow-md hover:border-gray-400" >
+        <input @input="onChangeSearchInput" placeholder="поиск по сайту" type="text" class=" bg-slate-150 border rounded-md   py-9 pl-8 pr-96 outline-none placeholder:text-slate-400 placeholder:text-2xl  hover:shadow-md hover:border-gray-400" >
       </div>
       <div class="flex gap-20">
         <div class="flex flex-col pt-4 cursor-pointer">
@@ -36,11 +36,11 @@
 
 
 
-  const onChangeSearchInput = (event) => {
+  const onChangeSearchInput = debounce((event) => {
     filters.searchQuery = event.target.value;
     emit('filters', filters)
     console.log(filters.searchQuery)
-  }
+  }, 1000)
 
   const emit = defineEmits(['requestName', 'filters'])
 
