@@ -5,10 +5,12 @@
         v-for="item in catalog"
         :key="item.id"
         :name="item.name"
-        
+
         @click="() => {
            assortCategory = item.nameOnEng
-          sendEvent()
+           requestName()
+           console.log(requestName())
+          // sendEvent()
         }"
 
       />
@@ -19,23 +21,30 @@
 <script setup>
   import axios from 'axios';
   import NameButton from '@/UI/NameButton.vue';
-  import { onMounted, ref } from 'vue';
+  import { computed, onMounted, ref } from 'vue';
+  import { useStore } from 'vuex';
 
-  const emit = defineEmits(['requestName'])
+  const store = useStore();
+  const requestName = () => {
+     computed(() => store.state.requestName = item.nameOnEng);
+     return store.state.requestName
+  }
+
+  // const emit = defineEmits(['requestName'])
 
   let assortCategory = ref('')
 
   const catalog = ref([])
 
-  function sendEvent() { 
-    emit('requestName', assortCategory.value)
-  }
+  // function sendEvent() {
+  //   emit('requestName', assortCategory.value)
+  // }
 
   const fetchCatalog = async () => {
     try {
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/catalog`)
       catalog.value = data
-     
+
 
     }
     catch(e) {

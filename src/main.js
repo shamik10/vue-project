@@ -1,6 +1,25 @@
 import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+import AssortimentsList from './modules/AssortimentsList.vue'
+import FavoritesCard from './pages/FavoritesCard.vue'
+import store from './store'
 
-createApp(App).mount('#app')
+
+const app = createApp(App)
+
+const routes = [
+  { path: `/`, name: 'AssortimentsList', component: AssortimentsList },
+  { path: '/favorites', name: 'favorites', component: FavoritesCard }
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+app.use(router);
+app.use(store);
+
+app.mount('#app')

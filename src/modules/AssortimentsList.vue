@@ -1,20 +1,26 @@
 <template>
   <div class="">
-    <div class="flex mt-4 gap-6">
+    <div class="flex justify-between mt-4 gap-6">
       <h1 class="underline text-4xl">Весь товар</h1>
-      <select @change="onChangeSelect" class="py-2 mt-1  px-3 border rounded-md outline-none ">
-        <option value="title">По названию</option>
-        <option value="price">По цене (дешевые)</option>
-        <option value="-price">По цене (дорогие)</option>
-      </select>
+      <div class="flex items-center  gap-4">
+        <h1 class="text-xl"> Отсортировать по :</h1>
+        <select @change="onChangeSelect" class="py-2 mt-1  px-3 border rounded-md outline-none ">
+          <option value="title">названию</option>
+          <option value="price">цене (дешевые)</option>
+          <option value="-price">цене (дорогие)</option>
+        </select>
+      </div>
     </div>
     <div class="flex flex-wrap justify-between gap-2">
       <CardBlock
         v-for="item in assortItems"
         :key="item.id"
+        :id="item.id"
         :title="item.title"
+        :category="item.category"
         :price="item.price"
         :description="item.description"
+
       />
     </div>
   </div>
@@ -34,7 +40,6 @@
 
   const paramVals = reactive({})
 
-
   const onChangeSelect = (event) => {
     paramVals.value.sortBy = event.target.value;
   }
@@ -43,21 +48,13 @@
 
   const fetchAssortiments = async () => {
     try {
-    //  console.log(props.dataSearch.value)
-
      const params = {
        sortBy: paramVals.value.sortBy
       }
-
       paramVals.value.searchQuery = props.dataSearch.value.searchQuery
-      // console.log(paramVals)
-
       if (paramVals.value.searchQuery) {
         params.title = `*${paramVals.value.searchQuery}*`;
-        // console.log(paramVals.value.searchQuery)
       }
-
-      // console.log(params);
 
       assortItems.value = []
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/${props.requestName || 'appliances'}`, {
