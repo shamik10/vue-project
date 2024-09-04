@@ -30,6 +30,12 @@
   import HomeBlock from "@/components/HomeBlock.vue";
   import { onMounted, reactive } from "vue";
   import debounce from 'lodash.debounce'
+import { useStore } from "vuex";
+
+  const store = useStore();
+  function searchVal (val) {
+    store.commit('changeSearch', val);
+  }
 
   const filters = reactive({
     sortBy: 'title',
@@ -38,24 +44,22 @@
 
 
   const onChangeSearchInput = debounce((event) => {
-    filters.searchQuery = event.target.value;
-    emit('filters', filters)
-    console.log(filters.searchQuery)
+    searchVal(event.target.value);
   }, 1000)
 
-  const emit = defineEmits(['requestName', 'filters'])
+  // const emit = defineEmits(['requestName', 'filters'])
 
-  function sendEvent(data) {
-    emit('requestName', data)
-  }
+  // function sendEvent(data) {
+  //   emit('requestName', data)
+  // }
 
 
-  function eventHanding(data) {
-    sendEvent(data)
-    console.log(data)
-  }
+  // function eventHanding(data) {
+  //   sendEvent(data)
+  //   console.log(data)
+  // }
 
-  onMounted(() => emit('filters', filters))
+  // onMounted(() => emit('filters', filters))
 
 </script>
 

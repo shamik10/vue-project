@@ -7,10 +7,18 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
+import { useStore } from "vuex"
+
   const props = defineProps({
     id: Number,
-    name: String
+    name: String,
+    nameOnEng: String
   })
+  
+    onMounted( async () => {
+
+    })
 
 </script>
 

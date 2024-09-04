@@ -1,18 +1,24 @@
-import { useSlots } from 'vue'
-import { createStore, useStore } from 'vuex'
+import { sortBy } from 'lodash';
+import { createStore } from 'vuex'
 
 export default createStore ({
   state: {
-    dataSearch: {},
-    requestName: 'g',
-    count: 0
+    sortBy: 'title',
+    searchQuery: '',
+    requestName: '',
   },
   mutations: {
-    requestName(state) {
-      state.count
+    requestName(state, requestName) {
+      state.requestName = requestName;
     },
-    decrement(state) {
-      state.count
+    changeSearch(state, searchQuery) {
+      state.searchQuery = searchQuery;
+    },
+    changeSortBy(state, sortBy) {
+      state.sortBy = sortBy;
     }
+  },
+  actions: {
+
   }
 })

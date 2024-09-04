@@ -12,7 +12,7 @@
             }" class="flex items-center gap-2 text-white justify-center py-2 text-xl text-center cursor-pointer w-48 h-16 bg-orange-400 hover:bg-orange-500 rounded-md px-10">Каталог
             <img :class="isRotating ? 'rotate-180' : 'rotate-0' " src="../assets/images/check_mark.svg" alt="">
         </div>
-        <CatalogList @requestName="eventHanding" v-if="isVisible" />
+        <CatalogList  v-if="isVisible" />
       </div>
   </div>
 </template>
@@ -26,14 +26,14 @@
 
   const emit = defineEmits(['requestName'])
 
-  function sendEvent(data) {
-      emit('requestName', data)
-    }
+  // function sendEvent(data) {
+  //     emit('requestName', data)
+  //   }
 
-  function eventHanding(data) {
-    sendEvent(data)
-    console.log(data)
-  }
+  // function eventHanding(data) {
+  //   sendEvent(data)
+  //   console.log(data)
+  // }
 
 </script>
 

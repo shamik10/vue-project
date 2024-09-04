@@ -30,18 +30,28 @@
 <script setup>
   import CardBlock from "@/components/CardBlock.vue";
   import axios from "axios";
-  import { onMounted, reactive, ref, watch } from 'vue';
+  import { computed, onMounted, reactive, ref, watch } from 'vue';
+  import { useStore } from "vuex";
 
 
+  // const requestName = ref('');
+
+  const store = useStore();
+  const requestName = computed(() => store.state.requestName);
+  const sortBy = computed(() => store.state.sortBy);
+  const searchQuery = computed(() => store.state.searchQuery);
+  function getSortBy (val) {
+    store.commit('changeSortBy', val)
+  }
   const props = defineProps({
-    requestName: String,
     dataSearch: Object
   })
 
   const paramVals = reactive({})
 
   const onChangeSelect = (event) => {
-    paramVals.value.sortBy = event.target.value;
+    // paramVals.value.sortBy = event.target.value;
+    getSortBy(event.target.value)
   }
 
   const assortItems = ref([]);
@@ -49,18 +59,20 @@
   const fetchAssortiments = async () => {
     try {
      const params = {
-       sortBy: paramVals.value.sortBy
+       sortBy: sortBy.value
+       
       }
-      paramVals.value.searchQuery = props.dataSearch.value.searchQuery
-      if (paramVals.value.searchQuery) {
-        params.title = `*${paramVals.value.searchQuery}*`;
+      // paramVals.value.searchQuery = props.dataSearch.value.searchQuery
+      if (searchQuery.value) {
+        params.title = `*${searchQuery.value}*`;
       }
-
-      assortItems.value = []
-      const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/${props.requestName || 'appliances'}`, {
+      console.log(sortBy.value, searchQuery.value);
+      assortItems.value = [];
+      const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/${requestName.value || 'appliances'}`, {
         params
       })
       assortItems.value = data;
+      console.log(requestName.value)
 
     }
     catch(e) {
@@ -69,15 +81,15 @@
 
   }
 
-  watch(paramVals, fetchAssortiments);
+  watch(() => sortBy.value, fetchAssortiments);
 
-  watch(props.dataSearch, fetchAssortiments)
+  watch(() => searchQuery.value, fetchAssortiments)
 
-  watch(() => props.requestName, fetchAssortiments);
+  watch( () => requestName, fetchAssortiments, {deep: true});
 
 
   onMounted( async () => {
-    paramVals.value = {...props.dataSearch.value};
+    // paramVals.value = {...props.dataSearch.value};
     await fetchAssortiments();
   })
 
