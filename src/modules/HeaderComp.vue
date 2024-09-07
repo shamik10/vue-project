@@ -1,10 +1,12 @@
 <template >
   <div class=" border-b-2 pb-4">
     <div class=" h-24 flex justify-between gap-8">
-      <HomeBlock @requestName="eventHanding" />
-      <div class="w-50  relative">
+      <HomeBlock  />
+      <!-- @requestName="eventHanding" -->
+      <div class="w-54 relative">
         <img class="absolute w-10 top-8  right-8 " src="@/assets/images/search.svg" alt="">
-        <input @input="onChangeSearchInput" placeholder="поиск по сайту" type="text" class=" bg-slate-150 border rounded-md   py-9 pl-8 pr-96 outline-none placeholder:text-slate-400 placeholder:text-2xl  hover:shadow-md hover:border-gray-400" >
+        <input @input="onChangeSearchInput" placeholder="поиск по сайту..." type="text" class=" bg-slate-150 border rounded-md py-9 pl-12 pr-96 outline-none placeholder:text-slate-400 
+        placeholder:text-2xl placeholder:self-start  hover:shadow-md hover:border-gray-400" >
       </div>
       <div class="flex gap-20">
         <router-link to="/favorites">
@@ -68,6 +70,5 @@ import { useStore } from "vuex";
   .text {
     font-weight: bold;
   }
-
 
 </style>

@@ -1,25 +1,25 @@
 <template>
-  <div class=" w-96 mt-8  py-6 px-8 bg-slate-300 rounded-md flex flex-col justify-center">
+  <div class=" w-96 mt-8  py-6 px-8 bg-slate-300 rounded-md flex flex-col justify-between">
     <div class="flex relative justify-center w-full">
-      <img  src="../assets/images/sneakers-1.jpg">
+      <img class="w-full" src="../assets/images/sneakers-1.jpg">
       <img @click="() => {
         addToFavorite();
         if(!isLikes) isLikes = true;
         else isLikes = false;
-      }"  class="absolute right-7 w-10 cursor-pointer h-10" :src="isLikes ? '/favorite_isClicked.svg' : '/favorites.svg'">
+      }"  class="absolute right-1 w-10 cursor-pointer h-10" :src="isLikes ? '/favorite_isClicked.svg' : '/favorites.svg'">
     </div>
     <div class="flex flex-col  gap-6 mt-4">
-      <div>
+      <div class="flex flex-col h-32">
         <p class="">
-          <b>Модель</b>: {{ props.title }}
+          <b class="">Модель</b>: {{ props.title }}
         </p>
         <p class="">
           <b>Описание:</b> {{ props.description }}
         </p>
+      </div>
         <p class="mt-8">
           <b>Цена:</b> {{ props.price }} руб.
         </p>
-      </div>
       <div class="flex justify-between gap-4">
         <button class="px-6 py-4 bg-orange-300 text-white rounded-md">купить</button>
         <button>в корзину</button>
@@ -41,7 +41,7 @@
     id: Number,
     title: String,
     description: String,
-    price: Number,
+    price: String,
     category: String,
     isLiked: Boolean
   })
@@ -72,8 +72,8 @@
       }
       const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`)
       const arrfavoriteId = items.data.map((el) => el.favoriteId)
-      const arrfavoriteCatg = items.data.map((el) => el.category)
-      console.log(arrfavoriteId)
+      // const arrfavoriteCatg = items.data.map((el) => el.category)
+      // console.log(arrfavoriteId)
       const arrId = items.data.filter((el) => el.favoriteId === obj.favoriteId && el.category === obj.category );
       console.log(arrId)
       if (props.isLiked) {
@@ -85,7 +85,6 @@
         console.log(data);
       }
       else {
-        console.log(arrId[0].id)
         await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${arrId[0].id}`)
         localStorage.removeItem(`${obj.favoriteId}`)
         console.log('del');

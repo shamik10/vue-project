@@ -20,10 +20,11 @@
 
 <template>
   <div class=" w-5/6 m-auto mt-10">
-    <HeaderComp @filters="(data) => {
+    <HeaderComp />
+    <!-- @filters="(data) => {
       dataSearch.value = data
     }
-    " @requestName="eventHanding" />
+    " @requestName="eventHanding" -->
     <router-view>
     </router-view>
   </div>

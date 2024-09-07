@@ -66,14 +66,11 @@
       if (searchQuery.value) {
         params.title = `*${searchQuery.value}*`;
       }
-      console.log(sortBy.value, searchQuery.value);
       assortItems.value = [];
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/${requestName.value || 'appliances'}`, {
         params
       })
       assortItems.value = data;
-      console.log(requestName.value)
-
     }
     catch(e) {
       console.log(e);
