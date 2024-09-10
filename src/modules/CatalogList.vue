@@ -9,8 +9,8 @@
 
         @click="() => {
            assortCategory = item.name;
-          getReqName(item.nameOnEng)
-           console.log(item.name)
+          getReqName(item.nameOnEng);
+           console.log(item.name);
           // sendEvent()
         }"
 
@@ -24,11 +24,11 @@
   import NameButton from '@/UI/NameButton.vue';
   import { computed, onMounted, ref } from 'vue';
   import { useStore } from 'vuex';
-  
-  
+
+
   // const emit = defineEmits(['requestName'])
 
-  let assortCategory = ref('')
+  let assortCategory = ref('');
   const catalog = ref([]);
   const store = useStore();
   const reqName = computed(() => store.state.requestName)
