@@ -6,7 +6,7 @@
   import FavoritesCard from '@/pages/FavoritesCard.vue';
   import { useStore } from 'vuex';
 
-
+  
   // const requestName = ref('')
 
   // const dataSearch = reactive({})
@@ -16,21 +16,24 @@
   //   console.log(data)
   // }
 
+  const store = useStore();
+  const inCart = computed(() => store.state.inCart);
+
 
 
 </script>
 
 <template>
+  
   <div class=" w-5/6  m-auto relative pt-1">
     <!-- <div class="flex h-96 ">
 
     </div> -->
-    <div class=" absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-      <cartItem />
-
-    </div>
+    <!-- <div v-if="inCart" class="fixed z-20 inset-0 bg-black bg-opacity-80  ">
+    </div> -->
     <HeaderComp />
-    <AssortimentsList />
+    <cartItem />
+    <!-- <AssortimentsList /> -->
     <!-- <router-view>
     </router-view> -->
   </div>

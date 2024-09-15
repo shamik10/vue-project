@@ -22,7 +22,7 @@
         </p>
       <div class="flex justify-between gap-4">
         <button class="px-6 py-4 bg-orange-300 text-white rounded-md">купить</button>
-        <button>в корзину</button>
+        <button @click="() => changeInCart()">в корзину</button>
       </div>
     </div>
   </div>
@@ -30,12 +30,18 @@
 
 <script setup>
   import axios from "axios"
-  import { onMounted, ref } from "vue"
+  import { computed, onMounted, ref } from "vue"
+  import { useStore } from "vuex";
 
-  let isLikes = ref(false);
+  const store = useStore();
+  const inCart = computed(() => store.state.inCart);
+  function changeInCart(val = true) {
+    store.commit('changeInCart', val)
+  }
+  
+  const  isLikes = ref(false);
   const isLikesCard = ref('');
   const catg = ref('');
-
 
   const props = defineProps({
     id: Number,
