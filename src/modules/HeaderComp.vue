@@ -5,7 +5,7 @@
       <!-- @requestName="eventHanding" -->
       <div class="w-54 relative">
         <img class="absolute w-10 top-8  right-8 " src="@/assets/images/search.svg" alt="">
-        <input @input="onChangeSearchInput" placeholder="поиск по сайту..." type="text" class=" bg-slate-150 border rounded-md py-9 pl-12 pr-96 outline-none placeholder:text-slate-400 
+        <input @input="onChangeSearchInput" placeholder="поиск по сайту..." type="text" class=" bg-slate-150 border rounded-md py-9 pl-12 pr-96 outline-none placeholder:text-slate-400
         placeholder:text-2xl placeholder:self-start  hover:shadow-md hover:border-gray-400" >
       </div>
       <div class="flex gap-20">
@@ -15,10 +15,12 @@
             <span class="text-center pt-2 text-2xl">Избранное</span>
           </div>
         </router-link>
-        <div class="flex flex-col pt-4 cursor-pointer">
-          <img class="flex self-center  w-12" src="@/assets/images/basket.svg" alt="">
-          <span class="text-center pt-2 text-2xl">Корзина</span>
-        </div>
+        <router-link to="/cart">
+          <div class="flex flex-col pt-4 cursor-pointer">
+            <img class="flex self-center  w-12" src="@/assets/images/basket.svg" alt="">
+            <span class="text-center pt-2 text-2xl">Корзина</span>
+          </div>
+        </router-link>
         <div class="flex flex-col pt-4 cursor-pointer">
           <img class="flex self-center  w-12" src="@/assets/images/profile.svg" alt="">
           <div class="text-center pt-2 text-2xl">Войти</div>
@@ -31,8 +33,8 @@
 <script setup>
   import HomeBlock from "@/components/HomeBlock.vue";
   import { onMounted, reactive } from "vue";
-  import debounce from 'lodash.debounce'
-import { useStore } from "vuex";
+  import debounce from 'lodash.debounce';
+  import { useStore } from "vuex";
 
   const store = useStore();
   function searchVal (val) {

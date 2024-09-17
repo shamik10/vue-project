@@ -22,7 +22,7 @@
         </p>
       <div class="flex justify-between gap-4">
         <button class="px-6 py-4 bg-orange-300 text-white rounded-md">купить</button>
-        <button @click="() => changeInCart()">в корзину</button>
+        <button @click="() => addInCart()">в корзину</button>
       </div>
     </div>
   </div>
@@ -38,10 +38,12 @@
   function changeInCart(val = true) {
     store.commit('changeInCart', val)
   }
-  
-  const  isLikes = ref(false);
+
+  const isLikes = ref(false);
   const isLikesCard = ref('');
   const catg = ref('');
+  const titlesName = ref([]);
+
 
   const props = defineProps({
     id: Number,
@@ -52,12 +54,33 @@
     isLiked: Boolean
   })
 
+  const addInCart = async () => {
+    try {
+      const obj = {
+        // ...props
+        title: 'her'
+
+      };
+      console.log(titlesName.value)
+      if(!titlesName.value.includes(obj.title)) {
+        console.log(titlesName.value.includes(obj.title))
+        const { data } = await axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/cart`, obj);
+        console.log(data);
+      }
+      else {
+        alert('данный товар был добавлен в карзину')
+
+      }
+    }
+    catch(e) {
+
+    }
+  }
+
   const getFavorite = async () => {
     try {
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);
-      // console.log(data);
       const favoriteCategory = data.filter(el => el.category === props.category && el.favoriteId === props.id );
-      // console.log(favoriteCategory)
       return favoriteCategory;
     }
     catch(err) {
@@ -78,16 +101,14 @@
       }
       const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`)
       const arrfavoriteId = items.data.map((el) => el.favoriteId)
-      // const arrfavoriteCatg = items.data.map((el) => el.category)
-      // console.log(arrfavoriteId)
       const arrId = items.data.filter((el) => el.favoriteId === obj.favoriteId && el.category === obj.category );
       console.log(arrId)
       if (props.isLiked) {
-        await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${props.id}`)
+        await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${props.id}`);
       }
       else if ((!arrfavoriteId.includes(obj.favoriteId) || !arrId[0] && isLikes.value ) || Object.keys(items.data).length === 0) {
         localStorage.setItem(`${obj.favoriteId}`, obj.favoriteId)
-        const { data } = await axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`, obj)
+        const { data } = await axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`, obj);
         console.log(data);
       }
       else {
@@ -101,10 +122,23 @@
     }
   }
 
+  const getCartTitles = async () => {
+    try {
+      const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/cart`);
+      console.log(data)
+      const titleN = data.forEach((el) => {  titlesName.value.push(el.title)})
+      console.log()
+    }
+    catch(err) {
+      console.log(err);
+    }
+  }
+
 
 
   onMounted(async () => {
     catg.value = await getFavorite();
+    await getCartTitles();
     isLikesCard.value = localStorage.getItem(props.id);
     if(props.isLiked) isLikes.value = true;
     else if (isLikesCard.value === null) isLikes.value = false;

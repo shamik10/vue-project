@@ -1,16 +1,16 @@
 <template>
-  <div class="flex w-full  bg-slate-300 h-72 rounded-md flex-row justify-between px-8 shadow-md pr-24">
-    <div class="flex   flex-row gap-8">
-      <div >
-        <img class="w-64 h-52 rouded-md" src="../assets/images/sneakers-1.jpg" alt="">
+  <div class="flex w-full mt-10 bg-slate-300 h-72 rounded-md flex-row justify-between px-8 shadow-md pr-24 text-xl">
+    <div class="flex  flex-row gap-8">
+      <div class="flex items-center" >
+        <img class=" border-2 border-solid border-black box-shadow insert-0 h-52 rouded-md" src="../assets/images/sneakers-1.jpg" alt="">
       </div>
-      <div class="flex ">
-        <div class="flex gap-4 flex-col h-32">
+      <div class="flex w-11/12 mt-9 text-2xl">
+        <div class=" gap-4 flex-col ">
           <p class="">
-            <b class="">Модель: Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas earum quam temporibus, optio minus sapiente dolor ea ab, distinctio, vero alias! Ipsum, rerum qui. Voluptas dignissimos tenetur quasi alias voluptates!</b>: 
+            <b class="">Модель:</b> Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam debitis placeat impedit, quisquam distinctio eum iste reiciendis maxime libero nihil quas? Pariatur aliquam, incidunt doloribus ullam saepe vel explicabo culpa!
           </p>
           <p class="">
-            <b>Описание:</b> 
+            <b>Описание:</b>
           </p>
         </div>
       </div>
@@ -24,5 +24,7 @@
 </template>
 
 <script setup>
+  import axios from 'axios';
+
 </script>
 
