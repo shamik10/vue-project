@@ -6,7 +6,8 @@ export default createStore ({
     sortBy: 'title',
     searchQuery: '',
     requestName: '',
-    inCart: false
+    inCart: false,
+    countItems: 0,
   },
   mutations: {
     requestName(state, requestName) {

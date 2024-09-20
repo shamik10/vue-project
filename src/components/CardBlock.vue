@@ -30,19 +30,17 @@
 
 <script setup>
   import axios from "axios"
-  import { computed, onMounted, ref } from "vue"
+  import { computed, onMounted, ref, watch } from "vue"
   import { useStore } from "vuex";
 
   const store = useStore();
   const inCart = computed(() => store.state.inCart);
-  function changeInCart(val = true) {
-    store.commit('changeInCart', val)
-  }
 
   const isLikes = ref(false);
   const isLikesCard = ref('');
   const catg = ref('');
   const titlesName = ref([]);
+  let count = ref(0)
 
 
   const props = defineProps({
@@ -57,18 +55,17 @@
   const addInCart = async () => {
     try {
       const obj = {
-        // ...props
-        title: 'her'
-
+        ...props
       };
       console.log(titlesName.value)
       if(!titlesName.value.includes(obj.title)) {
+        count.value++
         console.log(titlesName.value.includes(obj.title))
         const { data } = await axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/cart`, obj);
         console.log(data);
       }
       else {
-        alert('данный товар был добавлен в карзину')
+        alert('данный товар был добавлен в карзину');
 
       }
     }
@@ -126,15 +123,15 @@
     try {
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/cart`);
       console.log(data)
-      const titleN = data.forEach((el) => {  titlesName.value.push(el.title)})
-      console.log()
+      const titleN = data.forEach((el) => {titlesName.value.push(el.title)})
+      console.log(count.value)
     }
     catch(err) {
       console.log(err);
     }
   }
 
-
+  watch(() => count.value, getCartTitles)
 
   onMounted(async () => {
     catg.value = await getFavorite();

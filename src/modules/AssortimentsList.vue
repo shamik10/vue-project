@@ -47,7 +47,7 @@
     dataSearch: Object
   })
 
-  const paramVals = reactive({})
+  // const paramVals = reactive({})
 
   const onChangeSelect = (event) => {
     // paramVals.value.sortBy = event.target.value;
@@ -62,6 +62,7 @@
        sortBy: sortBy.value
        
       }
+      
       // paramVals.value.searchQuery = props.dataSearch.value.searchQuery
       if (searchQuery.value) {
         params.title = `*${searchQuery.value}*`;
@@ -82,7 +83,7 @@
 
   watch(() => searchQuery.value, fetchAssortiments)
 
-  watch( () => requestName, fetchAssortiments, {deep: true});
+  watch(() => requestName, fetchAssortiments, {deep: true});
 
 
   onMounted( async () => {

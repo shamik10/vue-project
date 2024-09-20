@@ -20,6 +20,7 @@
   import CardBlock from "@/components/CardBlock.vue";
   import axios from "axios";
   import { onMounted, ref } from "vue";
+  
 
   const favoriteItems = ref([]);
 

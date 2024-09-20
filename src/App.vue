@@ -16,6 +16,8 @@
   //   console.log(data)
   // }
 
+  
+
   const store = useStore();
   const inCart = computed(() => store.state.inCart);
 
@@ -34,7 +36,6 @@
     <HeaderComp />
     <!-- <cartItem /> -->
     <!-- <AssortimentsList /> -->
-    <Cart />
     <router-view>
     </router-view>
   </div>
