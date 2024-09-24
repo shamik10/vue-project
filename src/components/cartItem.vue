@@ -24,11 +24,11 @@
     <div class="flex flex-col justify-between pt-9 pb-9 ">
       <div class="flex gap-1 ">
         <p><b>Кол-во:</b> </p>
-        <div @click="increment()" class="">
+        <div @click="increment()" class="cursor-pointer">
           <img class="h-7" src="../assets/images/plus_btn.svg" alt="">
         </div>
         <p>{{ count }}</p>
-        <div @click="decrement()" class="">
+        <div @click="decrement()" class="cursor-pointer">
           <img class="h-7" src="../assets/images/minus_btn.svg" alt="">
         </div>
       </div>
@@ -56,17 +56,16 @@ import { ref, watch } from 'vue';
 
   let count = ref(1);
   let arrVal = ref([]);
-  let isDeleted = ref(0);
+  let isDeleted = ref(false);
   const newPrice = ref(`${props.price}`);
 
   const deleteCartItem = async () => {
     try {
+      isDeleted.value = true;
       await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/cart/${props.id}`);
-      isDeleted.value += 2
       console.log(props)
       sendDeleteItem()
       // location.reload()
-      isDeleted.value--
     }
     catch (e) {
       console.log(e)
@@ -78,6 +77,7 @@ import { ref, watch } from 'vue';
   const sendDeleteItem = () => {
     emit('deleteItem', isDeleted.value);
     console.log(isDeleted.value);
+    isDeleted.value = false;
   }
 
    const increment = () => {
@@ -95,7 +95,7 @@ import { ref, watch } from 'vue';
    }
 
    const decrement = () => {
-    if(count.value > 1) { 
+    if(count.value > 1) {
       count.value--
       return arrVal.value.reduce((acc, val) => {
         const minus = +val -  +acc
@@ -109,7 +109,7 @@ import { ref, watch } from 'vue';
    }
 
    watch(() => isDeleted.value, console.log('heey'))
-   
+
 
 </script>
 

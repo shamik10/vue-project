@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-4xl pt-4">Корзина:</h1>
     <div class="flex flex-col pt-6 gap-10">
-      <cartItem v-for="item in cartItems" 
+      <cartItem v-for="item in cartItems"
       :key="item.id"
       :id="item.id"
       :title="item.title"
@@ -40,7 +40,7 @@
     flagForReload.value = data.value;
   }
 
-  watch(() => flagForReload.value, getCartItem)
+  watch(() => flagForReload.value , getCartItem)
 
   onMounted( async () => {
     await getCartItem()

@@ -54,13 +54,13 @@
 
   const addInCart = async () => {
     try {
+      await getCartTitles()
       const obj = {
         ...props
       };
       console.log(titlesName.value)
       if(!titlesName.value.includes(obj.title)) {
         count.value++
-        console.log(titlesName.value.includes(obj.title))
         const { data } = await axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/cart`, obj);
         console.log(data);
       }
@@ -131,7 +131,7 @@
     }
   }
 
-  watch(() => count.value, getCartTitles)
+  // watch(() => count.value, getCartTitles)
 
   onMounted(async () => {
     catg.value = await getFavorite();
