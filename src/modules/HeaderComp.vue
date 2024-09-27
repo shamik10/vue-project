@@ -21,7 +21,7 @@
             <span class="text-center pt-2 text-2xl">Корзина</span>
           </div>
         </router-link>
-        <div class="flex flex-col pt-4 cursor-pointer">
+        <div @click="openModal" class="flex flex-col pt-4 cursor-pointer">
           <img class="flex self-center  w-12" src="@/assets/images/profile.svg" alt="">
           <div class="text-center pt-2 text-2xl">Войти</div>
         </div>
@@ -41,11 +41,15 @@
     store.commit('changeSearch', val);
   }
 
-  const filters = reactive({
-    sortBy: 'title',
-    searchQuery: '',
-  })
+  const emit = defineEmits('openModal');
+  // const filters = reactive({
+  //   sortBy: 'title',
+  //   searchQuery: '',
+  // })
 
+  function openModal(val = true) {
+    emit('openModal', val);
+  }
 
   const onChangeSearchInput = debounce((event) => {
     searchVal(event.target.value);

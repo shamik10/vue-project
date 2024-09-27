@@ -96,7 +96,7 @@
         category: props.category,
         isLiked: true
       }
-      const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`)
+      const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);
       const arrfavoriteId = items.data.map((el) => el.favoriteId)
       const arrId = items.data.filter((el) => el.favoriteId === obj.favoriteId && el.category === obj.category );
       console.log(arrId)
@@ -122,9 +122,7 @@
   const getCartTitles = async () => {
     try {
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/cart`);
-      console.log(data)
       const titleN = data.forEach((el) => {titlesName.value.push(el.title)})
-      console.log(count.value)
     }
     catch(err) {
       console.log(err);
@@ -141,7 +139,6 @@
     else if (isLikesCard.value === null) isLikes.value = false;
     else if (isLikesCard.value && catg.value[0].category === props.category) {
       isLikes.value = true;
-      console.log('e');
     }
   }
   )

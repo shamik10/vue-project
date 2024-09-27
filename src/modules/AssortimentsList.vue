@@ -43,9 +43,9 @@
   function getSortBy (val) {
     store.commit('changeSortBy', val)
   }
-  const props = defineProps({
-    dataSearch: Object
-  })
+  // const props = defineProps({
+  //   dataSearch: Object
+  // })
 
   // const paramVals = reactive({})
 
@@ -62,7 +62,6 @@
        sortBy: sortBy.value
        
       }
-      
       // paramVals.value.searchQuery = props.dataSearch.value.searchQuery
       if (searchQuery.value) {
         params.title = `*${searchQuery.value}*`;

@@ -1,43 +1,35 @@
-<script setup>
-  import HeaderComp from './modules/HeaderComp.vue';
-  import AssortimentsList from './modules/AssortimentsList.vue';
-  import cartItem from './components/cartItem.vue';
-  import { computed, onMounted, reactive, ref } from 'vue';
-  import FavoritesCard from '@/pages/FavoritesCard.vue';
-  import { useStore } from 'vuex';
-  import Cart from './pages/Cart.vue';
-
-  // const requestName = ref('')
-
-  // const dataSearch = reactive({})
-
-  // function eventHanding(data) {
-  //   requestName.value = data
-  //   console.log(data)
-  // }
-
-  
-
-  const store = useStore();
-  const inCart = computed(() => store.state.inCart);
-
-
-
-</script>
-
 <template>
-
-  <div class=" w-5/6  m-auto relative pt-1">
-    <!-- <div class="flex h-96 ">
-
-    </div> -->
-    <!-- <div v-if="inCart" class="fixed z-20 inset-0 bg-black bg-opacity-80  ">
-    </div> -->
-    <HeaderComp />
-    <!-- <cartItem /> -->
-    <!-- <AssortimentsList /> -->
+  <div class="w-5/6 m-auto relative pt-2">
+    <div v-if="modalFlag" class="flex h-screen fixed inset-0 z-20 items-center justify-center">
+      <SignIn
+        @closeModal="closeModalVal"
+      />
+    </div>
+    <HeaderComp @openModal="openModalVal"/>
     <router-view>
     </router-view>
   </div>
 </template>
+
+
+<script setup>
+  import { ref } from 'vue';
+  import HeaderComp from './modules/HeaderComp.vue';
+  import SignIn from './modules/SignIn.vue';
+  
+
+  const modalFlag = ref(false);
+
+  const openModalVal = (flag) => {
+    modalFlag.value = flag
+  }
+  
+  const closeModalVal = (flag) => {
+    modalFlag.value = flag
+  }
+
+
+</script>
+
+
 

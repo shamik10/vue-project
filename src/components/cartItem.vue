@@ -75,9 +75,10 @@ import { ref, watch } from 'vue';
   const emit = defineEmits(['deleteItem'])
 
   const sendDeleteItem = () => {
-    emit('deleteItem', isDeleted.value);
+    emit('deleteItem', isDeleted);
     console.log(isDeleted.value);
     isDeleted.value = false;
+    console.log(isDeleted.value);
   }
 
    const increment = () => {
@@ -108,7 +109,7 @@ import { ref, watch } from 'vue';
     }
    }
 
-   watch(() => isDeleted.value, console.log('heey'))
+  //  watch(() => isDeleted.value, () =>  isDeleted.value = false)
 
 
 </script>
