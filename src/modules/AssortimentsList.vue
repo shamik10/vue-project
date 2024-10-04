@@ -17,6 +17,7 @@
         :key="item.id"
         :id="item.id"
         :title="item.title"
+        :imageUrl="item.imageUrl"
         :category="item.category"
         :price="item.price"
         :description="item.description"
@@ -40,6 +41,8 @@
   const requestName = computed(() => store.state.requestName);
   const sortBy = computed(() => store.state.sortBy);
   const searchQuery = computed(() => store.state.searchQuery);
+  const names = ref([]);
+  
   function getSortBy (val) {
     store.commit('changeSortBy', val)
   }
@@ -70,7 +73,13 @@
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/${requestName.value || 'appliances'}`, {
         params
       })
+      console.log(data)
+      for (const elem of data) {
+        names.value.push(elem.title)
+      }
+      console.log(names.value);
       assortItems.value = data;
+      
     }
     catch(e) {
       console.log(e);
@@ -80,7 +89,7 @@
 
   watch(() => sortBy.value, fetchAssortiments);
 
-  watch(() => searchQuery.value, fetchAssortiments)
+  watch(() => searchQuery.value, fetchAssortiments);
 
   watch(() => requestName, fetchAssortiments, {deep: true});
 

@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { onMounted, onUnmounted, ref } from 'vue';
   import SignUp from './SignUp.vue';
   
 
@@ -61,5 +61,13 @@
     signUpFlag.value = flag;
     closeModal()
   }
+
+  onMounted(() => {
+    document.body.style.overflow = 'hidden';
+  })
+
+  onUnmounted(() => {
+    document.body.style.overflow = 'scroll';
+  })
 
 </script>

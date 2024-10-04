@@ -12,31 +12,43 @@
     </div>
     <div class="w-3/4 pb-16">
       <form action="" class="flex flex-col justify-start items-start gap-12 ">
+        <div class="w-full">
+          <input 
+          v-model="userData.login"
+          class="
+          w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-2xl    
+          focus:outline-none focus:shadow-outline bg-transparent" 
+          placeholder="Никнейм пользователя" type="text"
+        >
+
+        </div>
+      <div class="w-full">
         <input 
-        v-model="userData.login"
-        class="
-        w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-2xl    
-        focus:outline-none focus:shadow-outline bg-transparent" 
-        placeholder="Никнейм пользователя" type="text"
-      >
-      <input class="
-        w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-2xl    
-        focus:outline-none focus:shadow-outline bg-transparent" 
-        placeholder="Адрес электронной почты" type="text"
-      >
-      <input 
-        class="
-        w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-black    
-        placeholder:text-2xl placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
-        placeholder="Пароль" type="text"
-      >
-      <input 
-        class="
-        w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-black    
-        placeholder:text-2xl placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
-        value="+7 "
-        :placeholder="`+${userData.tel} (_ _ _) _ _ _-_ _-_ _`"  pattern="^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" type="tel"
-      >
+          v-model="userData.email"
+          class="
+          w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-2xl    
+          focus:outline-none focus:shadow-outline bg-transparent" 
+          placeholder="Адрес электронной почты" type="text"
+        >
+      </div>
+      <div class="w-full">
+        <input 
+        v-model="userData.password"
+          class="
+          w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-black    
+          placeholder:text-2xl placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
+          placeholder="Пароль" type="text"
+        >
+      </div>
+      <div class="w-full">
+        <input 
+          class="
+          w-full text-2xl appearance-none border-b-2 py-2 px-3 placeholder:text-black    
+          placeholder:text-2xl placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
+          value="+7 "
+          :placeholder="`+${userData.tel} (_ _ _) _ _ _-_ _-_ _`"  pattern="^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" type="tel"
+        >
+      </div>
       </form>
     </div>
     <div class="">
@@ -58,10 +70,28 @@ import { reactive, watch } from 'vue';
 
   })
 
+  const emailValidate = (email) => {
+    const indexAtMail = email.indexOf('@');
+    const mail = email.slice(indexAtMail, email.length - 1);
+    console.log(mail);
+  }
+
+  const passwordValidate = (password) => {
+    if (password.length < 8) {
+      console.log('пароль должен содержать 8 символов');
+    }
+    
+  }
+
   const UpModal = (flag = true) => {
     emit('closeSignUpModal', !flag);
   }
 
+  
 
-  watch(() => userData.login, () => console.log(userData.login), {deep: true})
+  watch(() => userData.email, () =>  emailValidate(userData.email));
+  watch(() => userData.password, () => { console.log('bigDick') 
+  passwordValidate(userData.password)});
+
+
 </script>

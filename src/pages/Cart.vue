@@ -11,6 +11,7 @@
       :category="item.category"
       :price="item.price"
       :description="item.description"
+      :imageUrl="item.imageUrl"
       />
     </div>
     <div v-if="flagForCart" class="flex  h-full justify-center items-center pb-64">
@@ -22,7 +23,7 @@
 <script setup>
   import cartItem from '@/components/cartItem.vue';
   import axios from 'axios';
-  import { onMounted, ref, watch } from 'vue';
+  import { onMounted, onUnmounted, ref, watch } from 'vue';
 
   const cartItems = ref([]);
   const flagForReload = ref(false);
@@ -51,6 +52,10 @@
 
   onMounted( async () => {
     await getCartItem()
+  })
+
+  onUnmounted(() => {
+    document.body.style.overflow = 'scroll';
   })
 </script>
 

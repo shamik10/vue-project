@@ -2,7 +2,7 @@
   <div class="flex bg-slate-300 h-72 rounded-md flex-row justify-between shadow-md pl-8 text-xl">
     <div class="flex w-full gap-8">
       <div class="flex items-center" >
-        <img class=" border-2 border-solid border-black box-shadow insert-0 h-52 rouded-md" src="../assets/images/sneakers-1.jpg" alt="">
+        <img class=" border-2 border-solid border-black box-shadow insert-0 h-52 rouded-md" :src="props.imageUrl" alt="">
       </div>
       <div class="flex flex-col justify-between w-8/12 mt-9 text-2xl">
         <div class=" gap-6 ">
@@ -51,6 +51,7 @@ import { ref, watch } from 'vue';
     description: String,
     price: String,
     category: String,
+    imageUrl: String,
     isLiked: Boolean
   })
 

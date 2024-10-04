@@ -1,7 +1,8 @@
 <template>
   <div class=" w-96 mt-8  py-6 px-8 bg-slate-300 rounded-md flex flex-col justify-between">
     <div class="flex relative justify-center w-full">
-      <img class="w-full" src="../assets/images/sneakers-1.jpg">
+      <img class="w-full" :src="imageUrl" >
+      
       <img @click="() => {
         addToFavorite();
         if(!isLikes) isLikes = true;
@@ -47,6 +48,7 @@
     id: Number,
     title: String,
     description: String,
+    imageUrl: String,
     price: String,
     category: String,
     isLiked: Boolean
@@ -94,6 +96,7 @@
         description: props.description,
         price: props.price,
         category: props.category,
+        imageUrl: props.imageUrl,
         isLiked: true
       }
       const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);

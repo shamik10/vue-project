@@ -8,6 +8,7 @@
           :id="item.id"
           :title="item.title"
           :category="item.category"
+          :imageUrl="item.imageUrl"
           :price="item.price"
           :description="item.description"
           :isLiked="item.isLiked"
@@ -27,7 +28,6 @@
   onMounted( async () => {
     try {
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);
-      // console.log(data);
       favoriteItems.value = data;
     }
     catch(e) {
