@@ -1,5 +1,5 @@
 <template>
-  <div class=" w-96 mt-8  py-6 px-8 bg-slate-300 rounded-md flex flex-col justify-between">
+  <div class=" w-72 mt-8  py-6 px-8 bg-slate-300 rounded-md flex flex-col justify-between">
     <div class="flex relative justify-center w-full">
       <img class="w-full" :src="imageUrl" >
       
@@ -41,7 +41,11 @@
   const isLikesCard = ref('');
   const catg = ref('');
   const titlesName = ref([]);
-  let count = ref(0)
+  const reloadValue = ref(false);
+  let count = ref(0);
+  
+
+  const emit = defineEmits('reloadFavorites')
 
 
   const props = defineProps({
@@ -99,6 +103,7 @@
         imageUrl: props.imageUrl,
         isLiked: true
       }
+      reload.value = true;
       const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);
       const arrfavoriteId = items.data.map((el) => el.favoriteId)
       const arrId = items.data.filter((el) => el.favoriteId === obj.favoriteId && el.category === obj.category );
@@ -114,6 +119,7 @@
       else {
         await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${arrId[0].id}`)
         localStorage.removeItem(`${obj.favoriteId}`)
+        reload()
         console.log('del');
       }
     }
@@ -132,6 +138,12 @@
     }
   }
 
+  const reload = () => {
+          emit('reloadFavorites', reloadValue);
+          console.log(reloadValue.value);
+          reloadValue.value = false;
+        }
+
   // watch(() => count.value, getCartTitles)
 
   onMounted(async () => {
@@ -140,7 +152,7 @@
     isLikesCard.value = localStorage.getItem(props.id);
     if(props.isLiked) isLikes.value = true;
     else if (isLikesCard.value === null) isLikes.value = false;
-    else if (isLikesCard.value && catg.value[0].category === props.category) {
+    else if (isLikesCard.value && catg.value[0]?.category === props.category) {
       isLikes.value = true;
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div  class=" mt-4">
     <router-link to="/">
-      <button class="py-2 text-xl text-white cursor-pointer w-48 h-16 bg-orange-400  hover:bg-orange-500 rounded-md px-10">
+      <button class="py-2 text-sm text-center text-white cursor-pointer w-28 h-16 bg-orange-400  hover:bg-orange-500 rounded-md ">
         {{ props.name }}
       </button>
     </router-link>

@@ -11,7 +11,7 @@
         </select>
       </div>
     </div>
-    <div class="flex flex-wrap justify-between gap-2">
+    <div class="grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
       <CardBlock
         v-for="item in assortItems"
         :key="item.id"
