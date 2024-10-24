@@ -10,46 +10,51 @@
         <button @click="() => emit('lieVal', false)" class="text-red-500 text-xl text-center">Войти</button>
       </div>
     </div>
-    <div class="w-3/4 pb-8">
-      <form action="" class="flex flex-col justify-start items-start gap-4 ">
-        <div class="w-full">
-          <input 
-          v-model="userData.login"
-          class="
-          w-full text-xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base 
-          focus:outline-none focus:shadow-outline bg-transparent" 
-          placeholder="Никнейм пользователя" type="text"
-        >
-
+    <div class="w-3/4 pb-6">
+      <form action="" >
+        <div class="flex flex-col justify-start items-start gap-4 ">
+          <div class="w-full">
+            <input 
+            v-model="userData.login"
+            class="
+            w-full text-xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base 
+            focus:outline-none focus:shadow-outline bg-transparent" 
+            placeholder="Никнейм пользователя" type="text"
+          >
+          </div>
+          <div class="w-full">
+              <input
+                id="inputSignUp"
+                v-model="userData.email"
+                class="
+                w-full text-xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base  
+                focus:outline-none focus:shadow-outline bg-transparent" 
+                placeholder="Адрес электронной почты" type="text"
+            >
+          </div>
+          <div class="w-full">
+            <input
+              id="inputSignUp"
+              v-model="userData.password"
+                class="
+                w-full text-base appearance-none border-b-2 py-2 px-3   
+                placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
+                placeholder="Пароль" type="text"
+            >
+          </div>
+          <div class="w-full">
+            <input
+              id="inputSignUp"
+              v-model="userData.tel"
+                class="
+                w-full text-base appearance-none border-b-2 py-2 px-3   
+                placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
+                value="+7 "
+                :placeholder="`+${userData.tel} (_ _ _) _ _ _-_ _-_ _`"  pattern="^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" type="tel"
+            >
+          </div>
         </div>
-      <div class="w-full">
-        <input 
-          v-model="userData.email"
-          class="
-          w-full text-xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base  
-          focus:outline-none focus:shadow-outline bg-transparent" 
-          placeholder="Адрес электронной почты" type="text"
-        >
-      </div>
-      <div class="w-full">
-        <input 
-        v-model="userData.password"
-          class="
-          w-full text-base appearance-none border-b-2 py-2 px-3   
-          placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
-          placeholder="Пароль" type="text"
-        >
-      </div>
-      <div class="w-full">
-        <input 
-          v-model="userData.tel"
-          class="
-          w-full text-base appearance-none border-b-2 py-2 px-3   
-          placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
-          value="+7 "
-          :placeholder="`+${userData.tel} (_ _ _) _ _ _-_ _-_ _`"  pattern="^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" type="tel"
-        >
-      </div>
+        <span class="h-4 text-red-400 text-sm" v-if="incorrectFlag" >*неправильный пароль или почтовый адрес</span>
       </form>
     </div>
     <div class="">
@@ -59,18 +64,26 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, watch } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
   const register = () => {
+    
     createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
     .then((data) => {
       console.log(data, 'регистрация прошла успешно');
       localStorage.setItem('accesToken', data.user.accessToken);
-    } )
+      userData.email = '';
+      userData.password = '';
+    })
+    .catch((e) => {
+      console.log(e);
+      incorrectFlag.value = true;
+    })
   }
   const emit = defineEmits('closeSignUpModal', 'lieVal');
   const lieVal = false;
+  const incorrectFlag = ref(false);
   const userData = reactive({
     login: '',
     email: '',

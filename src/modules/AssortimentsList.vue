@@ -77,7 +77,6 @@
       for (const elem of data) {
         names.value.push(elem.title)
       }
-      console.log(names.value);
       assortItems.value = data;
       
     }

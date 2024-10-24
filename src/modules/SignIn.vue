@@ -10,27 +10,33 @@
         <button @click="openModal" class="text-green-500 text-xl text-center">Создайте учетную запись</button>
       </div>
     </div>
-    <div class="w-3/4 pb-14">
-      <form action="" class="flex flex-col justify-start items-start  gap-12">
-        <input 
-        v-model="dataUser.email"
-        class="
-          w-full text-base appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base    
-          focus:outline-none focus:shadow-outline bg-transparent" 
-          placeholder="Адрес электронной почты или номер телефона" type="text"
-        >
-        <input
-        v-model="dataUser.password"
-        class="
-          w-full text-base appearance-none border-b-2 py-2 px-3    
-          placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
-          placeholder="Пароль" type="text"
-        >
+    <div class="w-3/4 pb-20">
+      <form action="" class="flex flex-col justify-start">
+        <div class="flex flex-col justify-start gap-10">
+          <input 
+          v-model="dataUser.email"
+          class="
+            w-full text-base appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base    
+            focus:outline-none focus:shadow-outline bg-transparent" 
+            placeholder="Адрес электронной почты или номер телефона" type="text"
+          >
+          <input
+          v-model="dataUser.password"
+          class="
+            w-full text-base appearance-none border-b-2 py-2 px-3    
+            placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
+            placeholder="Пароль" type="text"
+          >
+        </div>
+        <span class="h-4  text-red-400 text-sm" v-if="incorrectFlag" >*неправильный пароль или почтовый адрес</span>
       </form>
     </div>
-    <div class="py-4 px-10 bg-red-500 rounded-md mb-20">
-      <button @click="checkReg" class="text-xl text-white cursor-pointer">Продолжить</button>
+    <div class="mb-20 ">
+      <div @click="checkReg" class="py-4 px-10 bg-red-500 rounded-md cursor-pointer">
+        <button  class="text-xl text-white ">Продолжить</button>
+      </div>
     </div>
+    
     <div v-if="signUpFlag" class="flex h-screen fixed inset-0 z-20 items-center justify-center">
       <SignUp
         @closeSignUpModal="handleEventClose"
@@ -50,7 +56,9 @@
   const dataUser = reactive({
     email: '',
     password: ''
-  })
+  });
+
+  const incorrectFlag = ref(false);
 
   const signUpFlag = ref(false);
   const emit = defineEmits('closeModal', 'openModal');
@@ -74,13 +82,17 @@
 
   const auth = getAuth();
   const checkReg = () => {
+    
     signInWithEmailAndPassword(auth, dataUser.email, dataUser.password)
       .then((userCredential) => {
         const user = userCredential.user;
+        dataUser.email = '';
+        dataUser.password = '';
         console.log(user)
       })
       .catch((error) => {
-        console.log(error, 'неправильно')
+        console.log(error, 'неправильно');
+        incorrectFlag.value = true;
       });
   }
 
