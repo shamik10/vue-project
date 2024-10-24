@@ -9,7 +9,7 @@
         else isLikes = false;
       }"  class="absolute right-1 w-10 cursor-pointer h-10" :src="isLikes ? '/favorite_isClicked.svg' : '/favorites.svg'">
     </div>
-    <div class="flex flex-col  gap-6 mt-4">
+    <div class="flex flex-col text-sm gap-6 mt-4">
       <div class="flex flex-col h-32">
         <p class="">
           <b class="">Модель</b>: {{ props.title }}
