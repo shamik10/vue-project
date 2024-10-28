@@ -6,25 +6,25 @@
         <h1 class="text-3xl text-red-600 font-medium">Войти</h1>
       </div>
       <div class="flex flex-row justify-start gap-2 ">
-        <h1 class="text-slate-300 text-base pt-1">Новый пользователь?</h1>
+        <h1 class="text-slate-300 text-xl pt-1">Новый пользователь?</h1>
         <button @click="openModal" class="text-green-500 text-xl text-center">Создайте учетную запись</button>
       </div>
     </div>
     <div class="w-3/4 pb-20">
       <form action="" class="flex flex-col justify-start">
         <div class="flex flex-col justify-start gap-10">
-          <input 
+          <input
           v-model="dataUser.email"
           class="
-            w-full text-base appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base    
-            focus:outline-none focus:shadow-outline bg-transparent" 
+            w-full text-base appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base   
+            focus:outline-none focus:shadow-outline bg-transparent"
             placeholder="Адрес электронной почты или номер телефона" type="text"
           >
           <input
           v-model="dataUser.password"
           class="
-            w-full text-base appearance-none border-b-2 py-2 px-3    
-            placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent" 
+            w-full text-base appearance-none border-b-2 py-2 px-3   
+            placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent"
             placeholder="Пароль" type="text"
           >
         </div>
@@ -36,7 +36,7 @@
         <button  class="text-xl text-white ">Продолжить</button>
       </div>
     </div>
-    
+
     <div v-if="signUpFlag" class="flex h-screen fixed inset-0 z-20 items-center justify-center">
       <SignUp
         @closeSignUpModal="handleEventClose"
@@ -51,7 +51,7 @@
   import SignUp from './SignUp.vue';
   import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-  
+
 
   const dataUser = reactive({
     email: '',
@@ -61,7 +61,7 @@
   const incorrectFlag = ref(false);
 
   const signUpFlag = ref(false);
-  const emit = defineEmits('closeModal', 'openModal');
+  const emit = defineEmits(['closeModal', 'openModal']);
 
   function closeModal(val = false) {
     emit('closeModal', val);
@@ -82,10 +82,11 @@
 
   const auth = getAuth();
   const checkReg = () => {
-    
+
     signInWithEmailAndPassword(auth, dataUser.email, dataUser.password)
       .then((userCredential) => {
         const user = userCredential.user;
+        incorrectFlag.value = false;
         dataUser.email = '';
         dataUser.password = '';
         console.log(user)

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="flex justify-between mt-4 gap-6">
+    <div class="flex justify-between r mt-4 gap-6">
       <h1 class="underline text-4xl">Весь товар</h1>
       <div class="flex items-center  gap-4">
         <h1 class="text-xl"> Отсортировать по :</h1>
@@ -11,7 +11,7 @@
         </select>
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
+    <div class="flex grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
       <CardBlock
         v-for="item in assortItems"
         :key="item.id"
@@ -21,7 +21,6 @@
         :category="item.category"
         :price="item.price"
         :description="item.description"
-
       />
     </div>
   </div>
@@ -35,25 +34,18 @@
   import { useStore } from "vuex";
 
 
-  // const requestName = ref('');
 
   const store = useStore();
   const requestName = computed(() => store.state.requestName);
   const sortBy = computed(() => store.state.sortBy);
   const searchQuery = computed(() => store.state.searchQuery);
   const names = ref([]);
-  
+
   function getSortBy (val) {
     store.commit('changeSortBy', val)
   }
-  // const props = defineProps({
-  //   dataSearch: Object
-  // })
-
-  // const paramVals = reactive({})
 
   const onChangeSelect = (event) => {
-    // paramVals.value.sortBy = event.target.value;
     getSortBy(event.target.value)
   }
 
@@ -63,9 +55,8 @@
     try {
      const params = {
        sortBy: sortBy.value
-       
+
       }
-      // paramVals.value.searchQuery = props.dataSearch.value.searchQuery
       if (searchQuery.value) {
         params.title = `*${searchQuery.value}*`;
       }
@@ -78,7 +69,7 @@
         names.value.push(elem.title)
       }
       assortItems.value = data;
-      
+
     }
     catch(e) {
       console.log(e);
@@ -94,7 +85,6 @@
 
 
   onMounted( async () => {
-    // paramVals.value = {...props.dataSearch.value};
     await fetchAssortiments();
   })
 

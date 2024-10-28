@@ -20,7 +20,7 @@
         </div>
       </router-link>
       <div @click="openModal" class="flex flex-col pt-4 cursor-pointer">
-        <img class="flex self-center  w-12" src="@/assets/images/profile.svg" alt="">
+        <img class="flex self-center  w-12" src="@/assets/images/userAdd.svg" alt="">
         <div class="text-center pt-2 text-2xl">Войти</div>
       </div>
     </div>
@@ -38,7 +38,7 @@
     store.commit('changeSearch', val);
   }
 
-  const emit = defineEmits('openModal');
+  const emit = defineEmits(['openModal']);
   // const filters = reactive({
   //   sortBy: 'title',
   //   searchQuery: '',
@@ -74,5 +74,5 @@
     font-weight: bold;
   }
 
-  
+
 </style>

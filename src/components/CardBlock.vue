@@ -1,8 +1,8 @@
 <template>
-  <div class=" w-72 mt-8  py-6 px-8 bg-slate-300 rounded-md flex flex-col justify-between">
+  <div class="w-[340px] mt-8 py-6 px-8 bg-slate-300 rounded-md flex flex-col ">
     <div class="flex relative justify-center w-full">
       <img class="w-full" :src="imageUrl" >
-      
+
       <img @click="() => {
         addToFavorite();
         if(!isLikes) isLikes = true;
@@ -43,9 +43,9 @@
   const titlesName = ref([]);
   const reloadValue = ref(false);
   let count = ref(0);
-  
 
-  const emit = defineEmits('reloadFavorites')
+
+  const emit = defineEmits(['reloadFavorites'])
 
 
   const props = defineProps({
@@ -96,14 +96,11 @@
       const obj = {
         id: 0,
         favoriteId: props.id,
-        title: props.title,
-        description: props.description,
-        price: props.price,
-        category: props.category,
-        imageUrl: props.imageUrl,
+        ...props,
         isLiked: true
       }
-      reload.value = true;
+      reloadValue.value = true;
+      reload()
       const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);
       const arrfavoriteId = items.data.map((el) => el.favoriteId)
       const arrId = items.data.filter((el) => el.favoriteId === obj.favoriteId && el.category === obj.category );
@@ -119,7 +116,6 @@
       else {
         await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${arrId[0].id}`)
         localStorage.removeItem(`${obj.favoriteId}`)
-        reload()
         console.log('del');
       }
     }
@@ -139,8 +135,8 @@
   }
 
   const reload = () => {
+    console.log(reloadValue.value);
           emit('reloadFavorites', reloadValue);
-          console.log(reloadValue.value);
           reloadValue.value = false;
         }
 

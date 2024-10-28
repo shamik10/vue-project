@@ -39,6 +39,7 @@
 
   const favoriteItems = ref([]);
   const reloadFavorite = (dataEmit) => {
+    console.log(dataEmit.value)
     reloadFlag.value = dataEmit.value;
   }
 
