@@ -66,6 +66,7 @@
 <script setup>
 import { onMounted, reactive, ref, watch } from 'vue';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import axios from 'axios';
 
   const register = () => {
 
@@ -73,8 +74,10 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
     .then((data) => {
       console.log(data, 'регистрация прошла успешно');
       localStorage.setItem('accesToken', data.user.accessToken);
+      const usersData = axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
       userData.email = '';
       userData.password = '';
+
     })
     .catch((e) => {
       console.log(e);
@@ -88,7 +91,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
     login: '',
     email: '',
     password: '',
-    tel: +7
+    tel: '+7'
 
   })
 
@@ -110,9 +113,9 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
   }
 
 
-  watch(() => userData.email, () =>  emailValidate(userData.email));
-  watch(() => userData.password, () => { console.log('bigDick')
-  passwordValidate(userData.password)});
+  // watch(() => userData.email, () =>  emailValidate(userData.email));
+  // watch(() => userData.password, () => {
+  // passwordValidate(userData.password)});
 
   onMounted(() => (console.log(getAuth().currentUser)))
 

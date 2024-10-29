@@ -29,7 +29,7 @@
 
 <script setup>
   import HomeBlock from "@/components/HomeBlock.vue";
-  import { onMounted, reactive } from "vue";
+  import { computed, onMounted, reactive } from "vue";
   import debounce from 'lodash.debounce';
   import { useStore } from "vuex";
 
@@ -37,6 +37,8 @@
   function searchVal (val) {
     store.commit('changeSearch', val);
   }
+
+  const logInFlag = computed(()  => store.getters.getLogInFlag)
 
   const emit = defineEmits(['openModal']);
   // const filters = reactive({
@@ -64,7 +66,7 @@
   //   console.log(data)
   // }
 
-  // onMounted(() => emit('filters', filters))
+  onMounted(() => console.log(logInFlag.value))
 
 </script>
 

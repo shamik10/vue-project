@@ -45,7 +45,7 @@
   let count = ref(0);
 
 
-  const emit = defineEmits(['reloadFavorites'])
+  const emit = defineEmits(['reloadFavorites']);
 
 
   const props = defineProps({
@@ -64,9 +64,9 @@
       const obj = {
         ...props
       };
-      console.log(titlesName.value)
+      console.log(titlesName.value);
       if(!titlesName.value.includes(obj.title)) {
-        count.value++
+        count.value++;
         const { data } = await axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/cart`, obj);
         console.log(data);
       }
@@ -98,9 +98,9 @@
         favoriteId: props.id,
         ...props,
         isLiked: true
-      }
+      };
       reloadValue.value = true;
-      reload()
+      reload();
       const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);
       const arrfavoriteId = items.data.map((el) => el.favoriteId)
       const arrId = items.data.filter((el) => el.favoriteId === obj.favoriteId && el.category === obj.category );
@@ -114,8 +114,8 @@
         console.log(data);
       }
       else {
-        await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${arrId[0].id}`)
-        localStorage.removeItem(`${obj.favoriteId}`)
+        await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${arrId[0].id}`);
+        localStorage.removeItem(`${obj.favoriteId}`);
         console.log('del');
       }
     }

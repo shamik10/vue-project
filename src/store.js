@@ -1,4 +1,4 @@
-import { sortBy } from 'lodash';
+import { flatMap, sortBy } from 'lodash';
 import { createStore } from 'vuex'
 
 export default createStore ({
@@ -8,6 +8,13 @@ export default createStore ({
     requestName: '',
     inCart: false,
     countItems: 0,
+    logInFlag: false
+  },
+  getters: {
+    getLogInFlag(state) {
+      state.logInFlag = true;
+      return state.logInFlag;
+    }
   },
   mutations: {
     requestName(state, requestName) {

@@ -40,6 +40,7 @@
   const sortBy = computed(() => store.state.sortBy);
   const searchQuery = computed(() => store.state.searchQuery);
   const names = ref([]);
+  
 
   function getSortBy (val) {
     store.commit('changeSortBy', val)
