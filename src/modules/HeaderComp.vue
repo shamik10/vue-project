@@ -20,33 +20,69 @@
         </div>
       </router-link>
       <div @click="openModal" class="flex flex-col pt-4 cursor-pointer">
-        <img class="flex self-center  w-12" src="@/assets/images/userAdd.svg" alt="">
-        <div class="text-center pt-2 text-2xl">Войти</div>
+        <img class="flex self-center  w-12" :src= "userLogined ? './src/assets/images/profile.svg' : './src/assets/images/userAdd.svg' " alt="">
+        <div class="text-center pt-2 text-2xl">{{`${userLogined  ? login : 'войти'}`  }}</div>
       </div>
+      <div v-if="modalFlag" class="flex h-screen fixed inset-0 z-20 items-center justify-center">
+      <SignIn
+        @closeModal="closeModalVal"
+      />
+    </div>
     </div>
   </div>
 </template>
 
 <script setup>
   import HomeBlock from "@/components/HomeBlock.vue";
-  import { computed, onMounted, reactive } from "vue";
+  import SignIn from "./SignIn.vue";
+  import { computed, onMounted, reactive, ref, watch, watchEffect, watchSyncEffect } from "vue";
   import debounce from 'lodash.debounce';
   import { useStore } from "vuex";
+  import axios from "axios";
+  import { getAuth } from "firebase/auth";
 
   const store = useStore();
+  const modalFlag = ref(false);
+  const login = ref('');
+  const users = ref([]);
+  const userLogined = computed(() => store.state.logInFlag);
+
   function searchVal (val) {
     store.commit('changeSearch', val);
   }
 
-  const logInFlag = computed(()  => store.getters.getLogInFlag)
+
+  const getUsers = async () => {
+    const {data} = await axios.get('https://6d8dc8fcd4ab0089.mokky.dev/users');
+    const token = store.state.currentUser.accessToken;
+    console.log(data);
+    users.value = data;
+    for(const elem of users.value) {
+      if(token === elem.accessToken) {
+        login.value = elem.login;
+        console.log(elem);
+        assigData(elem);
+        // console.log(datat.login)
+        
+      }
+    }
+    // console.log(users.value[0]?.email);
+  }
+
+  function assigData (val) {
+    store.commit('adoptData', val);
+  }
+  const datat = computed(() => store.state.adoptData);
+
+
+  const closeModalVal = (flag) => {
+    modalFlag.value = flag;
+  }
 
   const emit = defineEmits(['openModal']);
-  // const filters = reactive({
-  //   sortBy: 'title',
-  //   searchQuery: '',
-  // })
 
   function openModal(val = true) {
+    modalFlag.value = val;
     emit('openModal', val);
   }
 
@@ -54,19 +90,10 @@
     searchVal(event.target.value);
   }, 1000)
 
-  // const emit = defineEmits(['requestName', 'filters'])
+  const auth = getAuth();
 
-  // function sendEvent(data) {
-  //   emit('requestName', data)
-  // }
+  watch( userLogined, () => getUsers())
 
-
-  // function eventHanding(data) {
-  //   sendEvent(data)
-  //   console.log(data)
-  // }
-
-  onMounted(() => console.log(logInFlag.value))
 
 </script>
 

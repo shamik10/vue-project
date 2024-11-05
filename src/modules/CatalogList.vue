@@ -8,8 +8,9 @@
         :nameOnEng="item.nameOnEng"
 
         @click="() => {
-           assortCategory = item.name;
+          assortCategory = item.name;
           getReqName(item.nameOnEng);
+          emit('closeCatalog', false)
            console.log(item.name);
           // sendEvent()
         }"
@@ -31,9 +32,13 @@
   let assortCategory = ref('');
   const catalog = ref([]);
   const store = useStore();
-  const reqName = computed(() => store.state.requestName)
+  const reqName = computed(() => store.state.requestName);
+
+  const emit = defineEmits(['closeCatalog']);
+
   function getReqName (name) {
     store.commit('requestName', name);
+
   }
 
   // function sendEvent() {
@@ -53,7 +58,6 @@
 
   onMounted( async () => {
     await fetchCatalog();
-    console.log(reqName.value)
   })
 </script>
 

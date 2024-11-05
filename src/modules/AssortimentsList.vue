@@ -11,7 +11,7 @@
         </select>
       </div>
     </div>
-    <div class="flex grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
+    <div class="grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
       <CardBlock
         v-for="item in assortItems"
         :key="item.id"
@@ -65,7 +65,7 @@
       const {data} = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/${requestName.value || 'appliances'}`, {
         params
       })
-      console.log(data)
+      // console.log(data);
       for (const elem of data) {
         names.value.push(elem.title)
       }

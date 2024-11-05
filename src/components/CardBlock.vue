@@ -1,5 +1,5 @@
 <template>
-  <div class="w-[340px] mt-8 py-6 px-8 bg-slate-300 rounded-md flex flex-col ">
+  <div class=" mt-8 py-6 px-8 bg-slate-300 rounded-md flex flex-col ">
     <div class="flex relative justify-center w-full">
       <img class="w-full" :src="imageUrl" >
 

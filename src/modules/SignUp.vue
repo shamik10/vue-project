@@ -72,11 +72,17 @@ import axios from 'axios';
 
     createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
     .then((data) => {
+      alert('регистрация прошла успешно');
       console.log(data, 'регистрация прошла успешно');
+      UpModal();
       localStorage.setItem('accesToken', data.user.accessToken);
+      localStorage.setItem('isLogin', false);
+      userData.accessToken = data.user.uid;
       const usersData = axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
       userData.email = '';
       userData.password = '';
+      userData.login = '';
+      userData.tel = '';
 
     })
     .catch((e) => {
@@ -117,6 +123,7 @@ import axios from 'axios';
   // watch(() => userData.password, () => {
   // passwordValidate(userData.password)});
 
-  onMounted(() => (console.log(getAuth().currentUser)))
+  
+
 
 </script>

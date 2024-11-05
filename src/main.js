@@ -23,7 +23,6 @@ const router = createRouter({
 app.use(router);
 app.use(store);
 
-app.mount('#app');
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -44,3 +43,4 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+app.mount('#app');

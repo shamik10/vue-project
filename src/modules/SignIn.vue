@@ -49,26 +49,33 @@
 <script setup>
   import { onMounted, onUnmounted, ref, reactive } from 'vue';
   import SignUp from './SignUp.vue';
-  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+  import { useStore } from "vuex";
 
 
+  const store = useStore();
 
   const dataUser = reactive({
     email: '',
     password: ''
   });
 
+  
   const incorrectFlag = ref(false);
 
   const signUpFlag = ref(false);
   const emit = defineEmits(['closeModal', 'openModal']);
+  
+  function changeFlag() {
+    store.commit('changeLogInFlag');
+  }
 
   function closeModal(val = false) {
     emit('closeModal', val);
   }
 
   function backLog(val) {
-    signUpFlag.value = val
+    signUpFlag.value = val;
   }
 
   function openModal(val = true) {
@@ -77,28 +84,47 @@
 
   function handleEventClose (flag) {
     signUpFlag.value = flag;
-    closeModal()
+    closeModal();
   }
 
   const auth = getAuth();
   const checkReg = () => {
-
     signInWithEmailAndPassword(auth, dataUser.email, dataUser.password)
       .then((userCredential) => {
+        onUserState();
+        changeFlag();
         const user = userCredential.user;
         incorrectFlag.value = false;
         dataUser.email = '';
         dataUser.password = '';
-        console.log(user)
+        localStorage.setItem('isLogin', true);
+        closeModal();
       })
       .catch((error) => {
         console.log(error, 'неправильно');
         incorrectFlag.value = true;
       });
   }
+  
+const onUserState = () => {
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const accessToken = user.uid;
+    store.commit('setToken', accessToken);
+    localStorage.setItem('accesToken', accessToken);
+    console.log(accessToken);
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    console.log('her');
+  }
+});
+}
 
   onMounted(() => {
     document.body.style.overflow = 'hidden';
+    // console.log(getAuth().currentUser)
   })
 
   onUnmounted(() => {

@@ -8,15 +8,24 @@ export default createStore ({
     requestName: '',
     inCart: false,
     countItems: 0,
-    logInFlag: false
+    logInFlag: false,
+    currentUser: {
+      
+    },
+    
   },
   getters: {
     getLogInFlag(state) {
-      state.logInFlag = true;
       return state.logInFlag;
     }
   },
   mutations: {
+    changeUser(state, uid) {
+      state.currentUser = uid;
+    },
+    changeLogInFlag(state, val = true) {
+      state.logInFlag = val;
+    },
     requestName(state, requestName) {
       state.requestName = requestName;
     },
@@ -28,6 +37,12 @@ export default createStore ({
     },
     changeInCart(state, inCart) {
       state.inCart = inCart;
+    },
+    adoptData(state, userData) {
+      state.currentUser = userData;
+    },
+    setToken(state, userToken) {
+      state.currentUser.accessToken = userToken;
     }
   },
   actions: {

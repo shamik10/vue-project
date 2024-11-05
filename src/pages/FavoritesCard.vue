@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-4xl">Избранное:</h1>
-    <div class="flex flex-wrap justify-between gap-2">
+    <!-- <div class="flex flex-wrap justify-between gap-2">
         <CardBlock
           v-for="item in favoriteItems"
           :key="item.id"
@@ -14,7 +14,21 @@
           :isLiked="item.isLiked"
           @reloadFavorites="reloadFavorite"
         />
-      </div>
+      </div> -->
+      <div class=" grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
+      <CardBlock
+        v-for="item in favoriteItems"
+        :key="item.id"
+        :id="item.id"
+        :title="item.title"
+        :imageUrl="item.imageUrl"
+        :category="item.category"
+        :price="item.price"
+        :description="item.description"
+        :isLiked="item.isLiked"
+        @reloadFavorites="reloadFavorite"
+      />
+    </div>
   </div>
 </template>
 

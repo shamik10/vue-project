@@ -14,7 +14,7 @@
             <img :class="isVisible ? 'rotate-180' : 'rotate-0' " src="../assets/images/check_mark.svg" alt="">
         </div>
         <div class="w-10">
-          <CatalogList  v-if="isVisible" />
+          <CatalogList @closeCatalog="closeCatalog"  v-if="isVisible" />
 
         </div>
       </div>
@@ -27,6 +27,10 @@
 
   let isVisible = ref(false);
   const onMount = ref(false);
+
+  const closeCatalog = (flag) => { 
+    isVisible.value = flag;
+  }
   
   function openClose() {
     if (!isVisible.value) isVisible.value = true;
