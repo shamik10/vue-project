@@ -25,7 +25,7 @@
             </div>
           </router-link>
           <div @click="openModal" class="flex flex-col pt-4 cursor-pointer">
-            <img class="flex self-center max-[1180px]:w-8 w-12" :src= "userLogined ? '@assets/images/profile.svg' : '@assets/images/userAdd.svg' " alt="">
+            <img class="flex self-center max-[1180px]:w-8 w-12" :src= "userLogined ? '@/profile.svg' : '@/userAdd.svg' " >
             <div class="text-center pt-2 text-2xl max-[1180px]:text-sm">{{`${userLogined  ? login : 'Войти'}`  }}</div>
           </div>
         </div>
