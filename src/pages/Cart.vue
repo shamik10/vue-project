@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen  flex flex-col box-border">
     <h1 class="text-4xl pt-4">Корзина:</h1>
-    <div class="flex flex-col pt-6 gap-10">
+    <div class="grid grid-rows-1 pt-6 gap-10   max-[650px]:justify-center max-[650px]:gap-6">
       <cartItem 
       @deleteItem="acceptEmit"
       v-for="item in cartItems"
@@ -14,7 +14,7 @@
       :imageUrl="item.imageUrl"
       />
     </div>
-    <div v-if="flagForCart" class="flex  h-full justify-center items-center pb-64">
+    <div v-if="flagForCart" class="flex h-full justify-center items-center pb-64">
       <h1 class="text-5xl text-slate-400">Ваша корзина пуста :(</h1>
     </div>
   </div>

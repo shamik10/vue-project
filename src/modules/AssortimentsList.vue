@@ -1,17 +1,17 @@
 <template>
   <div class="">
     <div class="flex justify-between r mt-4 gap-6">
-      <h1 class="underline text-4xl">Весь товар</h1>
-      <div class="flex items-center  gap-4">
-        <h1 class="text-xl"> Отсортировать по :</h1>
-        <select @change="onChangeSelect" class="py-2 mt-1  px-3 border rounded-md outline-none ">
+      <h1 class="underline text-4xl max-[750px]:text-xl max-[750px]:pt-1 max-[500px]:text-sm max-[500px]:pt-2">Весь товар</h1>
+      <div class="flex items-center  gap-4 max-[500px]:gap-1">
+        <h1 class="text-xl max-[750px]:text-xs"> Отсортировать по :</h1>
+        <select @change="onChangeSelect" class=" mt-1 h-8  border rounded-md outline-none max-[750px]:text-xs ">
           <option value="title">названию</option>
           <option value="price">цене (дешевые)</option>
           <option value="-price">цене (дорогие)</option>
         </select>
       </div>
     </div>
-    <div class="grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
+    <div class="grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3  max-[800px]:grid-cols-2 max-[800px]:gap-3  max-[550px]:grid-cols-1">
       <CardBlock
         v-for="item in assortItems"
         :key="item.id"

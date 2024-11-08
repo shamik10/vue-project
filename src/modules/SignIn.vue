@@ -1,39 +1,39 @@
 <template>
-  <div @click="closeModal()" class="opacity-70 fixed cursor-pointer inset-0 bg-gray-800"></div>
-  <div class="bg-yellow-50 inset-0 z-30  w-2/6 h-4/6 flex flex-col justify-between  items-center rounded-xl gap-4">
-    <div class="pt-8 pb-8">
+  <div @click="closeModal()" class="opacity-70 fixed cursor-pointer inset-0 bg-gray-800 z-30"></div>
+  <div class="bg-yellow-50 inset-0  w-2/6 h-4/6 flex flex-col justify-between  items-center rounded-xl gap-4 z-40 max-[950px]:w-3/6 max-[700]]:w-4/6 max-[550px]:w-[300px] max-[450px]:h-3/6">
+    <div class="pt-8 pb-8 max-[600px]:pb-0">
       <div class="pb-2 flex justify-center">
-        <h1 class="text-3xl text-red-600 font-medium">Войти</h1>
+        <h1 class="text-3xl text-red-600 font-medium max-[950px]:text-xl">Войти</h1>
       </div>
       <div class="flex flex-row justify-start gap-2 ">
-        <h1 class="text-slate-300 text-xl pt-1">Новый пользователь?</h1>
-        <button @click="openModal" class="text-green-500 text-xl text-center">Создайте учетную запись</button>
+        <h1 class="text-slate-300 text-xl pt-1 max-[950px]:text-xs">Новый пользователь?</h1>
+        <button @click="openModal" class="text-green-500 text-xl text-center max-[950px]:text-base max-[450px]:text-sm">Создайте учетную запись</button>
       </div>
     </div>
-    <div class="w-3/4 pb-20">
+    <div class="w-3/4 pb-20 max-[600px]:pb-5">
       <form action="" class="flex flex-col justify-start">
         <div class="flex flex-col justify-start gap-10">
           <input
           v-model="dataUser.email"
           class="
             w-full text-base appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base   
-            focus:outline-none focus:shadow-outline bg-transparent"
+            focus:outline-none focus:shadow-outline bg-transparent max-[550px]:placeholder:text-xs"
             placeholder="Адрес электронной почты или номер телефона" type="text"
           >
           <input
           v-model="dataUser.password"
           class="
             w-full text-base appearance-none border-b-2 py-2 px-3   
-            placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent"
+            placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent max-[550px]:placeholder:text-xs"
             placeholder="Пароль" type="text"
           >
         </div>
         <span class="h-4  text-red-400 text-sm" v-if="incorrectFlag" >*неправильный пароль или почтовый адрес</span>
       </form>
     </div>
-    <div class="mb-20 ">
-      <div @click="checkReg" class="py-4 px-10 bg-red-500 rounded-md cursor-pointer">
-        <button  class="text-xl text-white ">Продолжить</button>
+    <div class="mb-20 max-[600px]:mb-5">
+      <div @click="checkReg" class="py-4 px-10 bg-red-500 rounded-md cursor-pointer max-[950px]:px-4">
+        <button  class="text-xl text-white  max-[550px]:text-sm">Продолжить</button>
       </div>
     </div>
 
@@ -80,6 +80,8 @@
 
   function openModal(val = true) {
     signUpFlag.value = val;
+    // setTimeout(closeModal, 300);
+    
   }
 
   function handleEventClose (flag) {

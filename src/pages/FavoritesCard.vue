@@ -15,7 +15,7 @@
           @reloadFavorites="reloadFavorite"
         />
       </div> -->
-      <div class=" grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3 ">
+      <div class=" grid grid-cols-4 gap-8 max-[1024px]:grid-cols-3  max-[800px]:grid-cols-2 max-[800px]:gap-3  max-[550px]:grid-cols-1 ">
       <CardBlock
         v-for="item in favoriteItems"
         :key="item.id"

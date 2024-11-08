@@ -1,13 +1,13 @@
 <template>
   <div @click="UpModal()" class="opacity-0 fixed cursor-pointer inset-0 bg-gray-800"></div>
-  <div class="bg-yellow-50 inset-0 z-30  w-2/6 h-4/6 flex flex-col justify-around  items-center rounded-xl gap-4">
+  <div class="bg-yellow-50 inset-0 z-30  w-2/6 h-4/6 flex flex-col justify-around  items-center rounded-xl gap-4 max-[950px]:w-3/6 max-[650px]:w-4/6 max-[500px]:w-5/6"">
     <div class="pt-8">
       <div class=" flex justify-center">
-        <h1 class="text-3xl text-green-500 font-medium">Создать учетную запись</h1>
+        <h1 class="text-3xl text-green-500 font-medium max-[950px]:text-xl">Создать учетную запись</h1>
       </div>
       <div class="flex flex-row justify-start gap-2 pb-2 ">
-        <h1 class="text-slate-300 text-lg pt-1">У вас уже есть учетная запись?</h1>
-        <button @click="() => emit('lieVal', false)" class="text-red-500 text-xl text-center">Войти</button>
+        <h1 class="text-slate-300 text-lg pt-1 max-[950px]:text-base">У вас уже есть учетная запись?</h1>
+        <button @click="() => emit('lieVal', false)" class="text-red-500 text-xl text-center max-[950px]:text-base">Войти</button>
       </div>
     </div>
     <div class="w-3/4 pb-6">
@@ -18,7 +18,7 @@
             v-model="userData.login"
             class="
             w-full text-xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base
-            focus:outline-none focus:shadow-outline bg-transparent"
+            focus:outline-none focus:shadow-outline bg-transparent max-[950px]:placeholder:text-sm"
             placeholder="Никнейм пользователя" type="text"
           >
           </div>
@@ -28,7 +28,7 @@
                 v-model="userData.email"
                 class="
                 w-full text-xl appearance-none border-b-2 py-2 px-3 placeholder:text-slate-400 placeholder:text-base
-                focus:outline-none focus:shadow-outline bg-transparent"
+                focus:outline-none focus:shadow-outline bg-transparent max-[950px]:placeholder:text-sm"
                 placeholder="Адрес электронной почты" type="text"
             >
           </div>
@@ -38,7 +38,7 @@
               v-model="userData.password"
                 class="
                 w-full text-base appearance-none border-b-2 py-2 px-3
-                placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent"
+                placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent max-[950px]:placeholder:text-sm"
                 placeholder="Пароль" type="text"
             >
           </div>
@@ -48,7 +48,7 @@
               v-model="userData.tel"
                 class="
                 w-full text-base appearance-none border-b-2 py-2 px-3
-                placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent"
+                placeholder:text-base placeholder:text-slate-400 focus:outline-none focus:shadow-outline bg-transparent max-[950px]:placeholder:text-sm"
                 value="+7 "
                 :placeholder="`+${userData.tel} (_ _ _) _ _ _-_ _-_ _`"  pattern="^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" type="tel"
             >
@@ -58,7 +58,7 @@
       </form>
     </div>
     <div class="">
-      <button @click="register"  class=" py-4 px-10 bg-green-500 rounded-md mb-20 text-xl text-white cursor-pointer">Продолжить</button>
+      <button @click="register"  class=" py-4 px-10 bg-green-500 rounded-md mb-20 text-xl text-white cursor-pointer max-[950px]:text-sm">Продолжить</button>
     </div>
   </div>
 </template>

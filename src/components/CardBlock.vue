@@ -2,14 +2,13 @@
   <div class=" mt-8 py-6 px-8 bg-slate-300 rounded-md flex flex-col ">
     <div class="flex relative justify-center w-full">
       <img class="w-full" :src="imageUrl" >
-
       <img @click="() => {
         addToFavorite();
         if(!isLikes) isLikes = true;
         else isLikes = false;
       }"  class="absolute right-1 w-10 cursor-pointer h-10" :src="isLikes ? '/favorite_isClicked.svg' : '/favorites.svg'">
     </div>
-    <div class="flex flex-col text-sm gap-6 mt-4">
+    <div class="flex flex-col text-sm gap-6 mt-4 max-[1200px]:text-xs">
       <div class="flex flex-col h-32">
         <p class="">
           <b class="">Модель</b>: {{ props.title }}
@@ -18,7 +17,7 @@
           <b>Описание:</b> {{ props.description }}
         </p>
       </div>
-        <p class="mt-8">
+        <p class="mt-8 max-[450px]:mt-0">
           <b>Цена:</b> {{ props.price }} руб.
         </p>
       <div class="flex justify-between gap-4">

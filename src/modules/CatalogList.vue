@@ -1,6 +1,6 @@
 <template>
   <div class="w-24 flex flex-col ">
-    <div class="w-24">
+    <div class="w-24 ">
       <NameButton
         v-for="item in catalog"
         :key="item.id"
