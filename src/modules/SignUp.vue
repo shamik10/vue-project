@@ -7,7 +7,7 @@
       </div>
       <div class="flex flex-row justify-start gap-2 pb-2 ">
         <h1 class="text-slate-300 text-lg pt-1 max-[950px]:text-base">У вас уже есть учетная запись?</h1>
-        <button @click="() => emit('lieVal', false)" class="text-red-500 text-xl text-center max-[950px]:text-base">Войти</button>
+        <button @click="() => emit('lieVall', lieVal)" class="text-red-500 text-xl text-center max-[950px]:text-base">Войти</button>
       </div>
     </div>
     <div class="w-3/4 pb-6">
@@ -90,7 +90,7 @@ import axios from 'axios';
       incorrectFlag.value = true;
     })
   }
-  const emit = defineEmits(['closeSignUpModal', 'lieVal']);
+  const emit = defineEmits(['closeSignUpModal', 'lieVall']);
   const incorrectFlag = ref(false);
   let lieVal = false;
   const userData = reactive({
