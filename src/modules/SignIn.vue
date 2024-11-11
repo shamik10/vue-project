@@ -79,8 +79,9 @@
   }
 
   function openModal(val = true) {
-    signUpFlag.value = val;
-    // setTimeout(closeModal, 300);
+    signUpFlag.value = true;
+    console.log(signUpFlag.value);
+    setTimeout(closeModal, 300);
     
   }
 
