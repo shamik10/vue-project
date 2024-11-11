@@ -1,6 +1,6 @@
 <template>
   <div @click="UpModal()" class="opacity-0 fixed cursor-pointer inset-0 bg-gray-800"></div>
-  <div class="bg-yellow-50 inset-0 z-30  w-2/6 h-4/6 flex flex-col justify-around  items-center rounded-xl gap-4 max-[950px]:w-3/6 max-[650px]:w-4/6 max-[500px]:w-5/6"">
+  <div class="bg-yellow-50 inset-0 z-30  w-2/6 h-4/6 flex flex-col justify-around  items-center rounded-xl gap-4 max-[950px]:w-3/6 max-[650px]:w-4/6 max-[500px]:w-5/6">
     <div class="pt-8">
       <div class=" flex justify-center">
         <h1 class="text-3xl text-green-500 font-medium max-[950px]:text-xl">Создать учетную запись</h1>
@@ -68,17 +68,17 @@ import { onMounted, reactive, ref, watch } from 'vue';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import axios from 'axios';
 
-  const register = () => {
-
-    createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
+  const register = async () => {
+    await createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
     .then((data) => {
+
       alert('регистрация прошла успешно');
       console.log(data, 'регистрация прошла успешно');
       UpModal();
       localStorage.setItem('accesToken', data.user.accessToken);
       localStorage.setItem('isLogin', false);
       userData.accessToken = data.user.uid;
-      const usersData = axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
+      const usersData =  axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
       userData.email = '';
       userData.password = '';
       userData.login = '';

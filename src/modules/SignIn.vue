@@ -37,10 +37,9 @@
       </div>
     </div>
     <div v-if="signUpFlag" class="flex h-screen fixed inset-0 z-20 items-center justify-center">
-      <h1>gavno</h1>
       <SignUp
         @closeSignUpModal="handleEventClose"
-        @lieVal="backLog"
+        @lieVall="backLog"
       />
     </div>
   </div>
