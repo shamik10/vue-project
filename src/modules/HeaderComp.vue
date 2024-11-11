@@ -10,7 +10,7 @@
       </div>
       
       <img @click="openCloseBurger()" v-if="widthFlag" class="h-20 cursor-pointer max-[550px]:h-16" src="../assets/images/buger-menu.svg" alt="">
-      <div v-if="false">
+      <!-- <div v-if="false">
         <div class="flex gap-4">
           <router-link to="/favorites">
             <div class="flex flex-col pt-4 cursor-pointer">
@@ -29,7 +29,7 @@
             <div class="text-center pt-2 text-2xl max-[1180px]:text-sm">{{`${userLogined  ? login : 'Войти'}`  }}</div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div v-if="!widthFlag" class="flex gap-4">
         <router-link to="/favorites">
           <div class="flex flex-col pt-4 cursor-pointer">
@@ -43,8 +43,9 @@
             <span class="text-center pt-2 text-2xl max-[1180px]:text-sm">Корзина</span>
           </div>
         </router-link>
+        
         <div @click="openModal()" class="flex flex-col pt-4 cursor-pointer">
-          <img class="flex self-center max-[1180px]:w-8 w-12" :src= "userLogined ? './src/assets/images/profile.svg' : './src/assets/images/userAdd.svg' " alt="">
+          <img class="flex self-center max-[1180px]:w-8 w-12" :src= "userLogined ? './profile.svg' : './userAdd.svg'"  alt="">
           <div class="text-center pt-2 text-2xl max-[1180px]:text-sm">{{`${userLogined  ? login : 'Войти'}`  }}</div>
         </div>
       </div>
@@ -58,28 +59,28 @@
   <div v-if="burgerFlag">
     <div @click="openCloseBurger" class="opacity-70 z-20 fixed cursor-pointer inset-0 bg-gray-800"></div>
       <div class="bg-orange-300 w-2/6 rounded-md h-screen z-40 flex flex-col justify-self-end justify-center items-center inset-0 gap-4 fixed">
-          <div  @click="() => {
-            openModal();
-            openCloseBurger();
-            setTimeout(openCloseBurger, 10)
-            }"  
-            class="flex flex-col pt-4  pr-4 cursor-pointer">
-            <img class="flex self-center max-[1180px]:w-8 w-12" :src= "userLogined ? '../src/assets/images/profile.svg' : '../src/assets/images/userAdd.svg' " alt="">
-            <div class="text-center pt-2 text-2xl max-[1180px]:text-sm">{{`${userLogined  ? login : 'Войти'}`  }}</div>
-          </div>
-          <router-link @click="openCloseBurger()" to="/favorites">
-            <div class="flex flex-col  pr-4 cursor-pointer">
-              <img class="flex self-center pt-2 max-[1180px]:w-6 w-10" src="/favorites.svg" alt="">
-              <span class="text-center pt-2 text-2xl max-[1180px]:text-sm">Избранное</span>
-            </div>
-          </router-link>
-          <router-link @click="openCloseBurger()" to="/cart">
-            <div class="flex flex-col pt-4 cursor-pointer pr-3">
-              <img class="flex self-center max-[1180px]:w-8 w-12" src="@/assets/images/basket.svg" alt="">
-              <span class="text-center pt-2 text-2xl max-[1180px]:text-sm">Корзина</span>
-            </div>
-          </router-link>
+        <div  @click="() => {
+          openModal();
+          openCloseBurger();
+          setTimeout(openCloseBurger, 10)
+          }"  
+          class="flex flex-col pt-4  pr-4 cursor-pointer">
+          <img class="flex self-center max-[1180px]:w-8 w-12" :src= "userLogined ? '../src/assets/images/profile.svg' : '../src/assets/images/userAdd.svg' " alt="">
+          <div class="text-center pt-2 text-2xl max-[1180px]:text-sm">{{`${userLogined  ? login : 'Войти'}`  }}</div>
         </div>
+        <router-link @click="openCloseBurger()" to="/favorites">
+          <div class="flex flex-col  pr-4 cursor-pointer">
+            <img class="flex self-center pt-2 max-[1180px]:w-6 w-10" src="/favorites.svg" alt="">
+            <span class="text-center pt-2 text-2xl max-[1180px]:text-sm">Избранное</span>
+          </div>
+        </router-link>
+        <router-link @click="openCloseBurger()" to="/cart">
+          <div class="flex flex-col pt-4 cursor-pointer pr-3">
+            <img class="flex self-center max-[1180px]:w-8 w-12" src="@/assets/images/basket.svg" alt="">
+            <span class="text-center pt-2 text-2xl max-[1180px]:text-sm">Корзина</span>
+          </div>
+        </router-link>
+      </div>
   </div>
 </template>
 
@@ -100,7 +101,7 @@
   const users = ref([]);
   const userLogined = computed(() => store.state.logInFlag);
   const widthApp = computed(() => window.innerWidth);
-
+// :src= "userLogined ? './src/assets/images/profile.svg' : './src/assets/images/userAdd.svg'"
 
   function searchVal (val) {
     store.commit('changeSearch', val);
@@ -156,7 +157,6 @@
       return widthFlag.value = true;
     }
   }
-
 
   watchEffect(() => widthApp.value, showBurger())
 
