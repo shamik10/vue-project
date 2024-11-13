@@ -36,11 +36,10 @@
         <button  class="text-xl text-white  max-[550px]:text-sm">Продолжить</button>
       </div>
     </div>
-
     <div v-if="signUpFlag" class="flex h-screen fixed inset-0 z-20 items-center justify-center">
       <SignUp
         @closeSignUpModal="handleEventClose"
-        @lieVal="backLog"
+        @lieVall="backLog"
       />
     </div>
   </div>
@@ -96,7 +95,8 @@
   }
 
   function openModal(val = true) {
-    signUpFlag.value = val;
+    signUpFlag.value = true;
+    console.log(signUpFlag.value);
     // setTimeout(closeModal, 300);
     
   }

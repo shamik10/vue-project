@@ -7,7 +7,7 @@
       </div>
       <div class="flex flex-row justify-start gap-2 pb-2 ">
         <h1 class="text-slate-300 text-lg pt-1 max-[950px]:text-base">У вас уже есть учетная запись?</h1>
-        <button @click="() => emit('lieVal', false)" class="text-red-500 text-xl text-center max-[950px]:text-base">Войти</button>
+        <button @click="() => emit('lieVall', lieVal)" class="text-red-500 text-xl text-center max-[950px]:text-base">Войти</button>
       </div>
     </div>
     <div class="w-3/4 pb-6">
@@ -90,18 +90,31 @@ import Swal from 'sweetalert2';
   });
 
 
+<<<<<<< HEAD
   const register = () => {
     createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
     .then((data) => {
+=======
+  const register = async () => {
+    await createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
+    .then((data) => {
+
+      alert('регистрация прошла успешно');
+      console.log(data, 'регистрация прошла успешно');
+>>>>>>> 1c51a45d9363d083bc60a3ea26de1223f12da061
       UpModal();
       localStorage.setItem('accesToken', data.user.accessToken);
       localStorage.setItem('isLogin', false);
       userData.accessToken = data.user.uid;
+<<<<<<< HEAD
       Toast.fire({
         icon: "success",
         title: "Регистрация прошла успешно"
       });
       const usersData = axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
+=======
+      const usersData =  axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
+>>>>>>> 1c51a45d9363d083bc60a3ea26de1223f12da061
       userData.email = '';
       userData.password = '';
       userData.login = '';
@@ -113,7 +126,7 @@ import Swal from 'sweetalert2';
       incorrectFlag.value = true;
     })
   }
-  const emit = defineEmits(['closeSignUpModal', 'lieVal']);
+  const emit = defineEmits(['closeSignUpModal', 'lieVall']);
   const incorrectFlag = ref(false);
   let lieVal = false;
   const userData = reactive({
