@@ -77,19 +77,15 @@ import { ref, watch } from 'vue';
 
   const sendDeleteItem = () => {
     emit('deleteItem', isDeleted);
-    console.log(isDeleted.value);
     isDeleted.value = false;
-    console.log(isDeleted.value);
   }
 
    const increment = () => {
     if (arrVal.value.length === 0) {
       arrVal.value.push(props.price)
     }
-    count.value++
+    count.value++;
     return arrVal.value.reduce((acc, val) => {
-      console.log(arrVal.value)
-      console.log(+acc + +val)
       const sum = +acc + +val
       newPrice.value = sum;
       return arrVal.value[0] = sum
@@ -98,7 +94,7 @@ import { ref, watch } from 'vue';
 
    const decrement = () => {
     if(count.value > 1) {
-      count.value--
+      count.value--;
       return arrVal.value.reduce((acc, val) => {
         const minus = +val -  +acc
         newPrice.value = minus

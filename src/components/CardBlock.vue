@@ -22,7 +22,7 @@
         </p>
       <div class="flex justify-between gap-4">
         <button class="px-6 py-4 bg-orange-300 text-white rounded-md">купить</button>
-        <button @click="() => addInCart()">в корзину</button>
+        <button class="px-3 py-4 bg-slate-300 rounded-md hover:bg-slate-400" @click="() => addInCart()">в корзину</button>
       </div>
     </div>
   </div>
@@ -32,6 +32,7 @@
   import axios from "axios"
   import { computed, onMounted, ref, watch } from "vue"
   import { useStore } from "vuex";
+  import Swal from 'sweetalert2';
 
   const store = useStore();
   const inCart = computed(() => store.state.inCart);
@@ -43,9 +44,7 @@
   const reloadValue = ref(false);
   let count = ref(0);
 
-
   const emit = defineEmits(['reloadFavorites']);
-
 
   const props = defineProps({
     id: Number,
@@ -55,7 +54,23 @@
     price: String,
     category: String,
     isLiked: Boolean
-  })
+  });
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+    });
+    // Toast.fire({
+    //     icon: "success",
+    //     title: "Данный товар был добавлен в корзину"
+    //   });
 
   const addInCart = async () => {
     try {
@@ -63,15 +78,20 @@
       const obj = {
         ...props
       };
-      console.log(titlesName.value);
+       Toast.fire({
+        icon: "info",
+        title: "Данный товар был добавлен в корзину"
+      });
       if(!titlesName.value.includes(obj.title)) {
         count.value++;
         const { data } = await axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/cart`, obj);
         console.log(data);
       }
       else {
-        alert('данный товар был добавлен в карзину');
-
+        Toast.fire({
+          icon: "error",
+          title: "Данный товар был добавлен в корзину"
+        });
       }
     }
     catch(e) {
@@ -103,7 +123,6 @@
       const items = await axios.get(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites`);
       const arrfavoriteId = items.data.map((el) => el.favoriteId)
       const arrId = items.data.filter((el) => el.favoriteId === obj.favoriteId && el.category === obj.category );
-      console.log(arrId)
       if (props.isLiked) {
         await axios.delete(`https://6d8dc8fcd4ab0089.mokky.dev/isFavorites/${props.id}`);
       }

@@ -51,6 +51,7 @@
   import SignUp from './SignUp.vue';
   import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
   import { useStore } from "vuex";
+  import Swal from 'sweetalert2';
 
 
   const store = useStore();
@@ -59,6 +60,22 @@
     email: '',
     password: ''
   });
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+    });
+  // Toast.fire({
+  //       icon: "success",
+  //       title: "Регистрация прошла успешно"
+  //     });
 
   
   const incorrectFlag = ref(false);
@@ -100,6 +117,10 @@
         dataUser.email = '';
         dataUser.password = '';
         localStorage.setItem('isLogin', true);
+        Toast.fire({
+          icon: "success",
+          title: "Вы успешно вошли в аккаунт"
+        });
         closeModal();
       })
       .catch((error) => {

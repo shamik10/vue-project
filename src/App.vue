@@ -22,6 +22,7 @@
   const pxVal = ref(0);
   pxVal.value = window.innerWidth;
 
+
   const openModalVal = (flag) => {
     modalFlag.value = flag;
   }
@@ -33,7 +34,6 @@
     if (getAuth().currentUser !== null) {
       store.commit('changeLogInFlag');
     }
-    console.log(pxVal.value);
   }
   )
 </script>

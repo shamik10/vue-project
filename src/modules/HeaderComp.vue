@@ -109,12 +109,10 @@
   const getUsers = async () => {
     const {data} = await axios.get('https://6d8dc8fcd4ab0089.mokky.dev/users');
     const token = store.state.currentUser.accessToken;
-    console.log(data);
     users.value = data;
     for(const elem of users.value) {
       if(token === elem.accessToken) {
         login.value = elem.login;
-        console.log(elem);        
       }
     }
     // console.log(users.value[0]?.email);
