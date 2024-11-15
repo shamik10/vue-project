@@ -90,31 +90,25 @@ import Swal from 'sweetalert2';
   });
 
 
-<<<<<<< HEAD
-  const register = () => {
-    createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
-    .then((data) => {
-=======
+  // const register = () => {
+  //   createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
+  //   .then((data) => {
   const register = async () => {
     await createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
     .then((data) => {
 
       alert('регистрация прошла успешно');
       console.log(data, 'регистрация прошла успешно');
->>>>>>> 1c51a45d9363d083bc60a3ea26de1223f12da061
       UpModal();
       localStorage.setItem('accesToken', data.user.accessToken);
       localStorage.setItem('isLogin', false);
       userData.accessToken = data.user.uid;
-<<<<<<< HEAD
       Toast.fire({
         icon: "success",
         title: "Регистрация прошла успешно"
       });
       const usersData = axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
-=======
-      const usersData =  axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
->>>>>>> 1c51a45d9363d083bc60a3ea26de1223f12da061
+      // const usersData =  axios.post(`https://6d8dc8fcd4ab0089.mokky.dev/users`, userData);
       userData.email = '';
       userData.password = '';
       userData.login = '';
