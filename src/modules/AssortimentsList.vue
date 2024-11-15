@@ -3,11 +3,11 @@
     <div class="flex justify-between r mt-4 gap-6">
       <h1 class="underline text-4xl max-[750px]:text-xl max-[750px]:pt-1 max-[500px]:text-sm max-[500px]:pt-2">Весь товар</h1>
       <div class="flex items-center  gap-4 max-[500px]:gap-1">
-        <h1 class="text-xl max-[750px]:text-xs"> Отсортировать по :</h1>
+        <h1 class="text-xl max-[750px]:text-xs"> Отсортировать:</h1>
         <select @change="onChangeSelect" class=" mt-1 h-8  border rounded-md outline-none max-[750px]:text-xs ">
-          <option value="title">названию</option>
-          <option value="price">цене (дешевые)</option>
-          <option value="-price">цене (дорогие)</option>
+          <option value="title">по названию</option>
+          <option value="price">по цене (дешевые)</option>
+          <option value="-price">по цене (дорогие)</option>
         </select>
       </div>
     </div>

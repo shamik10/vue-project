@@ -96,8 +96,6 @@ import Swal from 'sweetalert2';
   const register = async () => {
     await createUserWithEmailAndPassword(getAuth(), userData.email, userData.password)
     .then((data) => {
-
-      alert('регистрация прошла успешно');
       console.log(data, 'регистрация прошла успешно');
       UpModal();
       localStorage.setItem('accesToken', data.user.accessToken);

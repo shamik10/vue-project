@@ -21,7 +21,7 @@
           <b>Цена:</b> {{ props.price }} руб.
         </p>
       <div class="flex justify-between gap-4">
-        <button class="px-6 py-4 bg-orange-300 text-white rounded-md">купить</button>
+        <button class="px-6 py-4 bg-orange-300 text-white rounded-md hover:bg-orange-400">купить</button>
         <button class="px-3 py-4 bg-slate-300 rounded-md hover:bg-slate-400" @click="() => addInCart()">в корзину</button>
       </div>
     </div>
